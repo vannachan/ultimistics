@@ -1,0 +1,46 @@
+[
+  {
+    "name": "Vanna Chan",
+    "alias": "vchan",
+    "position": "Cutter",
+    "games": [
+      {
+        "title": "Game1",
+        "stats": {
+          "points": 1,
+          "drops": 0,
+          "assists": 3,
+          "blocks": 1,
+          "completions": 10
+        }
+      },
+      {
+        "title": "Game2",
+        "stats": {
+          "points": 3,
+          "drops": 2,
+          "assists": 0,
+          "blocks": 0,
+          "completions": 14
+        }
+      }
+    ]
+  },
+  {
+    "name": "John Doe",
+    "alias": "jdoe",
+    "position": "Hybrid",
+    "games": [
+      {
+        "title": "My First Game",
+        "stats": {
+          "points": 1,
+          "drops": 0,
+          "assists": 3,
+          "blocks": 1,
+          "completions": 10
+        }
+      }
+    ]
+  }
+]
