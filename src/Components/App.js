@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../Sass/App.scss';
 import firebase from '../firebase';
+import PlayerSelect from './PlayerSelect';
 import Summary from './Summary';
 
 class App extends Component {
@@ -11,8 +12,10 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      playerName: "Vanna Chan",
-      playerAlias: "vchan",
+      database: [],
+      allPlayers: [],
+      playerName: "",
+      // playerAlias: "vchan",
       playerId: 0,
       position: "",
       allGames: [],
@@ -29,15 +32,18 @@ class App extends Component {
   // ======================
   componentDidMount() {
     const dbRef = firebase.database().ref();
-
+    
     // Load up the entire database and reload when there are ANY updates
     dbRef.on('value', (data) => {
       const response = data.val();
+      let players=[];
 
       console.log("This is the full database:", response);
 
       for (let key in response) {
-
+        // Populate our full roster of players
+        players.push(response[key].name);
+        
         // Let's see if we can find a player name match
         if (response[key].name === this.state.playerName) {
           // Player found, let's store all the game history!
@@ -62,11 +68,56 @@ class App extends Component {
 
         } // end if
       } // end for-in
+
+      this.setState({
+        database: response,
+        allPlayers: players
+      });
+
     });
   }
 
   // ======================
-  // Handle Game Name Change
+  // Player Select
+  // ======================
+  selectPlayer = (event) => {
+
+    const db = [...this.state.database];
+    for (let key in db) {
+      
+      // Let's see if we can find a player name match
+      if (db[key].name === event.target.value) {
+        // Player found, let's store all the game history!
+        const newPosition = db[key].position;
+        const newGameState = db[key].games;
+
+        // Populate our state with some initial information from the last game we had!
+        const totalGames = newGameState.length;
+        const newGameTitle = newGameState[totalGames - 1].title;
+        const newGameId = totalGames - 1;
+        const newStats = newGameState[totalGames - 1].stats;
+  
+        this.setState({
+          playerId: key,
+          position: newPosition,
+          allGames: newGameState,
+          totalGames: totalGames,
+          currGame: newGameTitle,
+          currGameId: newGameId,
+          currStats: newStats
+        });
+
+      } // end if
+    } // end for-in
+
+    this.setState({
+      playerName: event.target.value,
+      playerId: event.target.options.selectedIndex - 1
+    });
+  }
+
+  // ======================
+  // Handle Game Input Change
   // ======================
   handleChange = (event) => {
     this.setState({
@@ -98,6 +149,10 @@ class App extends Component {
     dbRef.child(this.state.totalGames).set({
       title: this.state.userInput,
       stats: defaultStats
+    });
+
+    this.setState({
+      userInput: '',
     });
 
   }
@@ -166,6 +221,21 @@ class App extends Component {
         <div className="wrapper">
           <section className="info">
             <div className="playerInfo">
+
+            <select onChange={this.selectPlayer} defaultValue={'DEFAULT'} >
+              <option value="DEFAULT" disabled>Select a player</option>
+              {
+                this.state.allPlayers.map( (player, index) => {
+                  return (
+                    <PlayerSelect 
+                      name={player} 
+                      key={index} 
+                    />
+                  );
+                })
+              }
+            </select>
+
               <h2>{this.state.playerName}</h2>
               <h3>Position: {this.state.position}</h3>
             </div>
@@ -181,12 +251,14 @@ class App extends Component {
             </div>
 
             <div className="newGame">
-              <input 
-                type="text" 
-                onChange={this.handleChange}
-                value={this.state.userInput}
-                placeholder="Game Title" />
-              <button onClick={this.addGame}>Add new game!</button>
+              <form action="">
+                <input 
+                  type="text" 
+                  onChange={this.handleChange}
+                  value={this.state.userInput}
+                  placeholder="Game Title" />
+                <button onClick={this.addGame}>Add new game!</button>
+              </form>
             </div>
           </section>
   

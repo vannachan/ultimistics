@@ -69,11 +69,15 @@ h1 {
 
 .newGame {
     background: $main;
-    @include flex(column);
     height: 15%;
     width: 100%;
     border-radius: 0 0 25px 25px;
     
+    form {
+        @include flex(column);
+        height: 100%;
+    }
+
     button,
     input {
         width: 70%;
