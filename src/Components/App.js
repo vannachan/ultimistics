@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../Sass/App.scss';
 import firebase from '../firebase';
+import Summary from './Summary';
 
 class App extends Component {
 
@@ -12,10 +13,14 @@ class App extends Component {
     this.state = {
       playerName: "Vanna Chan",
       playerAlias: "vchan",
+      playerId: 0,
       position: "",
       allGames: [],
+      totalGames: 0,
       currGame: "",
-      currStats: {}
+      currGameId: 0,
+      currStats: {},
+      userInput: ""
     }
   }
 
@@ -42,12 +47,16 @@ class App extends Component {
           // Populate our state with some initial information from the last game we had!
           const totalGames = newGameState.length;
           const newGameTitle = newGameState[totalGames - 1].title;
+          const newGameId = totalGames - 1;
           const newStats = newGameState[totalGames - 1].stats;
     
           this.setState({
+            playerId: key,
             position: newPosition,
             allGames: newGameState,
+            totalGames: totalGames,
             currGame: newGameTitle,
+            currGameId: newGameId,
             currStats: newStats
           });
 
@@ -58,38 +67,11 @@ class App extends Component {
   }
 
   // ======================
-  // Handle Click
-  // ======================
-  handleClick = (event) => {
-    event.preventDefault();
-    const name = "vchan"
-    const dbRef = firebase.database().ref().child(`${name}_games`);
-
-    dbRef.push({
-      "name": "Vanna Chan",
-      "title": "Game5this one",
-      "stats": {
-        "points": 1,
-        "drops": 0,
-        "assists": 3,
-        "blocks": 1,
-        "completions": 10
-      }
-    });
-
-    // this is how you push an object into firebase
-    // dbRef.push({
-    //   book: this.state.userInput,
-    //   author: this.state.author
-    // });
-  }
-
-  // ======================
   // Handle Game Name Change
   // ======================
   handleChange = (event) => {
     this.setState({
-      game: event.target.value
+      userInput: event.target.value
     });
   }
 
@@ -99,25 +81,35 @@ class App extends Component {
   addGame = (event) => {
     event.preventDefault();
     const defaultStats = {
-      points: 1,
-      drops: 2,
-      assists: 3,
-      blocks: 4,
-      completions: 5
+      assists: 0,
+      blocks: 0,
+      callahans: 0,
+      catches: 0, 
+      drops: 0,
+      goals: 0,
+      pulls: 0,
+      stalls: 0,
+      throwaways: 0,
+      touches: 0
     };
 
-    this.setState( {
-      stats: defaultStats
+    // this.setState({
+    //   currStats: defaultStats
+    // });
 
+    console.log("default stats:", defaultStats);
+    console.log("newly updated curr states:", this.state.currStats);
+    const dbRef = firebase.database().ref(`${this.state.playerId}/games`);
+
+    // Anddd write it into Firebase
+    dbRef.child(this.state.totalGames).set({
+      title: this.state.userInput,
+      stats: defaultStats
     });
 
-    console.log(this.state);
-    console.log(this.state.stats);
-    const dbRef = firebase.database().ref().child(`${this.state.alias}_games`);
-    
-    // dbRef.push({
-    //   "title": this.state.game,
-    //   "stats": this.state.stats
+    // this.setState({
+    //   currGame: this.state.userInput,
+    //   currGameId: this.currGameId + 1
     // });
 
   }
@@ -125,14 +117,68 @@ class App extends Component {
   // ======================
   // Display Stats
   // ======================
-  displayStats = () => {
-    let summary = [];
+  // displayStats = () => {
+  //   let summary = [];
+  
+  //   for (let key in this.state.currStats) {
+  //     summary.push(<li key={key}>{`${key}: ${this.state.currStats[key]}`}</li>);
+  //   }
+
+  //   return summary;
+  // }
+
+  // ======================
+  // Display Stats Counter Section
+  // ======================
+  displayStatsTrack = () => {
+    let tracker = [];
   
     for (let key in this.state.currStats) {
-      summary.push(<li key={key}>{`${key}: ${this.state.currStats[key]}`}</li>);
+      tracker.push(
+        <li key={key}>
+          <button onClick={() => this.handleAdd(key)}> + </button>
+          <p>{`${key}`}</p>
+          <button onClick={() => this.handleSubtract(key)}> - </button>
+        </li>
+      );
     }
 
-    return summary;
+    return tracker;
+  }
+
+  // ======================
+  // Add Stats
+  // ======================
+  handleAdd = (key) => {
+    // Saving local copies of these values
+    const value = this.state.currStats[key];
+    const localStats = this.state.currStats;
+    
+    localStats[key] = value + 1;
+
+    // Referencing a super specific spot to write this new stats object
+    const dbRef = firebase.database().ref(`${this.state.playerId}/games/${this.state.currGameId}/stats`);
+
+    // Anddd write it into Firebase
+    dbRef.set(localStats);
+  }
+
+  // ======================
+  // Subtract Stats
+  // ======================
+  handleSubtract = (key) => {
+    const value = this.state.currStats[key];
+    const localStats = this.state.currStats;
+    
+    if (value > 0) {
+      localStats[key] = value - 1;
+
+      // Referencing a super specific spot to write this new stats object
+      const dbRef = firebase.database().ref(`${this.state.playerId}/games/${this.state.currGameId}/stats`);
+
+      // Anddd write it into Firebase
+      dbRef.set(localStats);
+    }
   }
 
   // ======================
@@ -149,18 +195,21 @@ class App extends Component {
           <h4>Game Summary</h4>
           <h5>Game Name: {this.state.currGame}</h5>
           <ul>
-            {this.displayStats()}
+          <Summary summaryObject={this.state.currStats} />
+            {/*this.displayStats()*/}
           </ul>
         </div>
 
         <div className="statsCounter">
-        
+          <ul>
+            {this.displayStatsTrack()}
+          </ul>
         </div>
 
         <input 
           type="text" 
           onChange={this.handleChange}
-          value={this.state.game}
+          value={this.state.userInput}
           placeholder="Game Title" />
         <button onClick={this.addGame}>Add new game!</button>
         {/*<button onClick={this.handleCLick}>Click me</button>*/}

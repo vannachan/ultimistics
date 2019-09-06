@@ -1,0 +1,26 @@
+.statsCounter {
+    background: white;
+    ul {
+        // border: 3px red solid;
+        padding: 20px 0;
+        @include flex(row);
+        flex-wrap: wrap;
+    }
+    
+    li {
+        margin: 5px;
+        border: 2px black solid;
+        @include flex(row, space-evenly);
+        width: 40%;
+    }
+
+    p {
+        width: 30%;
+    }
+
+    button {
+        // margin: 0 30px;
+        width: 40px;
+        height: 25px;
+    }
+}

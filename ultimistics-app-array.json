@@ -5,23 +5,33 @@
     "position": "Cutter",
     "games": [
       {
-        "title": "Game1",
+        "title": "Game 1",
         "stats": {
-          "points": 1,
-          "drops": 0,
           "assists": 3,
           "blocks": 1,
-          "completions": 10
+          "callahans": 0,
+          "catches": 7, 
+          "drops": 0,
+          "goals": 1,
+          "pulls": 0,
+          "stalls": 0,
+          "throwaways": 2,
+          "touches": 10
         }
       },
       {
-        "title": "Game2",
+        "title": "Game 2",
         "stats": {
-          "points": 3,
-          "drops": 2,
           "assists": 0,
           "blocks": 0,
-          "completions": 14
+          "callahans": 0,
+          "catches": 9, 
+          "drops": 2,
+          "goals": 2,
+          "pulls": 1,
+          "stalls": 0,
+          "throwaways": 1,
+          "touches": 14
         }
       }
     ]
@@ -34,11 +44,16 @@
       {
         "title": "My First Game",
         "stats": {
-          "points": 1,
-          "drops": 0,
-          "assists": 3,
-          "blocks": 1,
-          "completions": 10
+          "assists": 0,
+          "blocks": 0,
+          "callahans": 1,
+          "catches": 13, 
+          "drops": 3,
+          "goals": 1,
+          "pulls": 1,
+          "stalls": 0,
+          "throwaways": 2,
+          "touches": 22
         }
       }
     ]
