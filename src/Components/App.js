@@ -63,7 +63,6 @@ class App extends Component {
         } // end if
       } // end for-in
     });
-
   }
 
   // ======================
@@ -93,39 +92,15 @@ class App extends Component {
       touches: 0
     };
 
-    // this.setState({
-    //   currStats: defaultStats
-    // });
-
-    console.log("default stats:", defaultStats);
-    console.log("newly updated curr states:", this.state.currStats);
     const dbRef = firebase.database().ref(`${this.state.playerId}/games`);
 
-    // Anddd write it into Firebase
+    // NTS: The child of the reference point is set to a number in order to keep the Array structure, if this is set to anything else, the app will break because Firebase will create its own key and turn the Array into an Object when using the simple .push() method
     dbRef.child(this.state.totalGames).set({
       title: this.state.userInput,
       stats: defaultStats
     });
 
-    // this.setState({
-    //   currGame: this.state.userInput,
-    //   currGameId: this.currGameId + 1
-    // });
-
   }
-
-  // ======================
-  // Display Stats
-  // ======================
-  // displayStats = () => {
-  //   let summary = [];
-  
-  //   for (let key in this.state.currStats) {
-  //     summary.push(<li key={key}>{`${key}: ${this.state.currStats[key]}`}</li>);
-  //   }
-
-  //   return summary;
-  // }
 
   // ======================
   // Display Stats Counter Section
@@ -188,31 +163,41 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Ultimistics Tracking App</h1>
-        <h2>{this.state.playerName}</h2>
-        <h3>Position: {this.state.position}</h3>
+        <div className="wrapper">
+          <section className="info">
+            <div className="playerInfo">
+              <h2>{this.state.playerName}</h2>
+              <h3>Position: {this.state.position}</h3>
+            </div>
+    
+            <div className="playerSummary">
+              <div className="gameTitle">
+                <h4>Game Summary</h4>
+                <h5>Game Name: {this.state.currGame}</h5>
+              </div>
+              <table>
+                <Summary summaryObject={this.state.currStats} />
+              </table>
+            </div>
 
-        <div className="playerSummary">
-          <h4>Game Summary</h4>
-          <h5>Game Name: {this.state.currGame}</h5>
-          <ul>
-          <Summary summaryObject={this.state.currStats} />
-            {/*this.displayStats()*/}
-          </ul>
+            <div className="newGame">
+              <input 
+                type="text" 
+                onChange={this.handleChange}
+                value={this.state.userInput}
+                placeholder="Game Title" />
+              <button onClick={this.addGame}>Add new game!</button>
+            </div>
+          </section>
+  
+          <div className="counter">
+            <section className="statsCounter">
+              <ul>
+                {this.displayStatsTrack()}
+              </ul>
+            </section>
+          </div>
         </div>
-
-        <div className="statsCounter">
-          <ul>
-            {this.displayStatsTrack()}
-          </ul>
-        </div>
-
-        <input 
-          type="text" 
-          onChange={this.handleChange}
-          value={this.state.userInput}
-          placeholder="Game Title" />
-        <button onClick={this.addGame}>Add new game!</button>
-        {/*<button onClick={this.handleCLick}>Click me</button>*/}
       </div>
     );
   }

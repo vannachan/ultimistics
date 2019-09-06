@@ -1,4 +1,15 @@
 //====================
+// Colours
+//====================
+$main: white;
+$background: paleturquoise;
+
+//====================
+// Fonts
+//====================
+$baseFont: 'Montserrat', sans-serif;
+
+//====================
 // Mixins
 //====================
 @mixin flex($direction, $justContent: center) {

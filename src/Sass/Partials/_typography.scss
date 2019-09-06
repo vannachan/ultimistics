@@ -1,0 +1,41 @@
+//====================
+// All Font Stylings
+//====================
+html {
+  font-size: 62.5%;
+  font-family: $baseFont;
+}
+
+body {
+  font-size: 1.6rem;
+}
+
+//====================
+// Headings
+//====================
+h1 {
+  @include fontStyle(3rem, 4rem, $main, $baseFont, 500);
+  padding: 20px;
+}
+
+h2 {
+  @include fontStyle(2.5rem, 2.8rem, black, $baseFont, 500);
+  padding: 20px;
+}
+
+h3 {
+  @include fontStyle(1.6rem, 2.5rem, black, $baseFont, 500);
+
+}
+
+h4 {
+  @include fontStyle(1.8rem, 2.5rem, black, $baseFont, 500);
+  // padding: 10px;
+  
+}
+
+h5 {
+  @include fontStyle(1.6rem, 2.5rem, black, $baseFont, 400);
+  
+}
+
