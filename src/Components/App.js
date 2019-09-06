@@ -14,6 +14,7 @@ class App extends Component {
     this.state = {
       database: [],
       allPlayers: [],
+      totalPlayers: 0,
       playerName: "",
       // playerAlias: "vchan",
       playerId: 0,
@@ -23,7 +24,9 @@ class App extends Component {
       currGame: "",
       currGameId: 0,
       currStats: {},
-      userInput: ""
+      userGame: "",
+      userPlayer: "",
+      userPosition: ""
     }
   }
 
@@ -36,16 +39,17 @@ class App extends Component {
     // Load up the entire database and reload when there are ANY updates
     dbRef.on('value', (data) => {
       const response = data.val();
-      let players=[];
+      console.log("This is the resp",response);
 
-      console.log("This is the full database:", response);
+      let players=[];
 
       for (let key in response) {
         // Populate our full roster of players
         players.push(response[key].name);
-        
+
         // Let's see if we can find a player name match
         if (response[key].name === this.state.playerName) {
+
           // Player found, let's store all the game history!
           const newPosition = response[key].position;
           const newGameState = response[key].games;
@@ -66,12 +70,13 @@ class App extends Component {
             currStats: newStats
           });
 
-        } // end if
+        } 
       } // end for-in
 
       this.setState({
         database: response,
-        allPlayers: players
+        allPlayers: players,
+        totalPlayers: players.length
       });
 
     });
@@ -119,9 +124,18 @@ class App extends Component {
   // ======================
   // Handle Game Input Change
   // ======================
-  handleChange = (event) => {
+  handleGameChange = (event) => {
     this.setState({
-      userInput: event.target.value
+      userGame: event.target.value
+    });
+  }
+
+  // ======================
+  // Handle Name Input Change
+  // ======================
+  handlePlayerChange = (event) => {
+    this.setState({
+      userPlayer: event.target.value
     });
   }
 
@@ -143,18 +157,86 @@ class App extends Component {
       touches: 0
     };
 
-    const dbRef = firebase.database().ref(`${this.state.playerId}/games`);
-
-    // NTS: The child of the reference point is set to a number in order to keep the Array structure, if this is set to anything else, the app will break because Firebase will create its own key and turn the Array into an Object when using the simple .push() method
-    dbRef.child(this.state.totalGames).set({
-      title: this.state.userInput,
-      stats: defaultStats
-    });
+    // Only add new game when the Player is selected
+    if (this.state.playerName != '') {
+      const dbRef = firebase.database().ref(`${this.state.playerId}/games`);
+  
+      // NTS: The child of the reference point is set to a number in order to keep the Array structure, if this is set to anything else, the app will break because Firebase will create its own key and turn the Array into an Object when using the simple .push() method
+      dbRef.child(this.state.totalGames).set({
+        title: this.state.userGame,
+        stats: defaultStats
+      });
+    } else {
+      alert("Please give a name to this epic game!");
+    }
 
     this.setState({
-      userInput: '',
+      userGame: '',
     });
+  }
 
+  
+  // ======================
+  // Select Position
+  // ======================
+  selectPosition = (event) => {
+    this.setState({
+      userPosition: event.target.value
+    });
+  }
+
+  // ======================
+  // Add Player
+  // ======================
+  // FIXME: Couldn't seem to figure out how to load the page after a new player was added, so for now the user has to select this new player from the dropdown menu
+  // - Look into how this.setState is used as a synchronous event
+  // - I was able to load the state but the check done in ComponentDidMount() didn't populate with the latest player's info...
+  // ======================
+  addPlayer = (event) => {
+    event.preventDefault();
+
+    if (this.state.userPlayer !== '' && this.state.userPosition !== '') {
+      
+      const newPlayer = this.state.userPlayer;
+      const newPos = this.state.userPosition;
+
+      const dbRef = firebase.database().ref();
+  
+      // NTS: The child of the reference point is set to a number in order to keep the Array structure, if this is set to anything else, the app will break because Firebase will create its own key and turn the Array into an Object when using the simple .push() method
+      dbRef.child(this.state.totalPlayers).set({
+        name: newPlayer,
+        position: newPos,
+        games: [{
+          title: "First Game",
+          stats: {
+            assists: 0,
+            blocks: 0,
+            callahans: 0,
+            catches: 0, 
+            drops: 0,
+            goals: 0,
+            pulls: 0,
+            stalls: 0,
+            throwaways: 0,
+            touches: 0
+          }
+        }]
+      });
+
+      this.setState({
+        userPlayer: ''
+      });
+  
+      document.getElementById("addPlayer").reset();
+
+      alert(`${newPlayer} added successfully! Select them in the dropdown menu to start tracking!`);
+    } else if (this.state.userPlayer === '') {
+      alert("Missing name.. everyone's got a name!");
+    } else if (this.state.userPosition === '') {
+      alert("Pick a position, any position!");
+    } else {
+      alert("Sorry, we can't add ghost players!");
+    }
   }
 
   // ======================
@@ -222,7 +304,13 @@ class App extends Component {
           <section className="info">
             <div className="playerInfo">
 
-            <select onChange={this.selectPlayer} defaultValue={'DEFAULT'} >
+            <label htmlFor="player">Player:</label>
+            <select 
+              onChange={this.selectPlayer} 
+              name="player" 
+              id="player"
+              defaultValue={'DEFAULT'} 
+            >
               <option value="DEFAULT" disabled>Select a player</option>
               {
                 this.state.allPlayers.map( (player, index) => {
@@ -251,13 +339,36 @@ class App extends Component {
             </div>
 
             <div className="newGame">
+
               <form action="">
                 <input 
                   type="text" 
-                  onChange={this.handleChange}
-                  value={this.state.userInput}
+                  onChange={this.handleGameChange}
+                  value={this.state.userGame}
                   placeholder="Game Title" />
                 <button onClick={this.addGame}>Add new game!</button>
+              </form>
+
+              <form action="" id="addPlayer">
+                <input 
+                  type="text" 
+                  onChange={this.handlePlayerChange}
+                  value={this.state.userPlayer}
+                  placeholder="Player Name" 
+                />
+                <select 
+                  onChange={this.selectPosition}   
+                  name="position" 
+                  id="position" 
+                  defaultValue={'DEFAULT'}
+                >
+                  <option value="DEFAULT" disabled>Choose a position</option>
+                  <option>Handler</option>
+                  <option>Cutter</option>
+                  <option>Hybrid</option>
+                </select>
+
+                <button onClick={this.addPlayer}>Add new player!</button>
               </form>
             </div>
           </section>
