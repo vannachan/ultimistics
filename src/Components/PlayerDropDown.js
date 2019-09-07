@@ -13,9 +13,9 @@ class PlayerDropDown extends Component {
         >
           <option value="DEFAULT" disabled>Select a player</option>
           {
-            this.props.allPlayers.map( (player) => {
+            this.props.allPlayers.map( (player, i) => {
               return (
-                <option>{player}</option>
+                <option key={i}>{player}</option>
               );
             })
           }
