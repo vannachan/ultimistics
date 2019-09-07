@@ -135,7 +135,7 @@ class App extends Component {
   }
 
   // ======================
-  // Handle Game Input Change
+  // Handler -  Game Input Change
   // ======================
   handleGameChange = (event) => {
     this.setState({
@@ -144,7 +144,7 @@ class App extends Component {
   }
 
   // ======================
-  // Handle Name Input Change
+  // Handler - Name Input Change
   // ======================
   handlePlayerChange = (event) => {
     this.setState({
@@ -194,7 +194,7 @@ class App extends Component {
 
   
   // ======================
-  // Select Position
+  // Handler - Select Position
   // ======================
   selectPosition = (event) => {
     this.setState({
@@ -215,7 +215,15 @@ class App extends Component {
     // Upload stats to Firebase before we change anything
     this.uploadStats();
 
-    if (this.state.userPlayer !== '' && this.state.userPosition !== '') {
+    // Is there a duplicate in names?
+    let isUnique = true;
+    for (let i = 0; i < this.state.database.length; i++) {
+      if (this.state.userPlayer == this.state.database[i].name) {
+        isUnique = false;
+      }
+    }
+
+    if (isUnique && this.state.userPlayer !== '' && this.state.userPosition !== '') {
       
       const newPlayer = this.state.userPlayer;
       const newPos = this.state.userPosition;
@@ -250,6 +258,8 @@ class App extends Component {
       document.getElementById("addPlayer").reset();
 
       alert(`${newPlayer} added successfully! Select them in the dropdown menu to start tracking!`);
+    } else if (!isUnique) {
+      alert("Uh oh! Looks like that player is already in the database!");
     } else if (this.state.userPlayer === '') {
       alert("Missing name.. everyone's got a name!");
     } else if (this.state.userPosition === '') {
