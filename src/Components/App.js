@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../Sass/App.scss';
 import firebase from '../firebase';
-import Summary from './Summary';
+import SummaryTable from './SummaryTable';
 import DisplayTracker from './DisplayTracker';
 import AddPlayerForm from './AddPlayerForm';
 import AddGameForm from './AddGameForm';
@@ -327,9 +327,10 @@ class App extends Component {
                 <h4>Game Summary</h4>
                 <h5>Game Name: {this.state.currGame}</h5>
               </div>
-              <table>
-                <Summary summaryObject={this.state.currStats} />
-              </table>
+
+              <SummaryTable 
+                summaryObject={this.state.currStats}
+              />
             </div>
 
             <div className="newData">
@@ -353,13 +354,13 @@ class App extends Component {
             <section className="statsCounter">
               <ul>
                 {
-                  Object.keys(this.state.currStats).map( (statName, i) => {
+                  Object.keys(this.state.currStats).map( (statName) => {
                     return (
                       <DisplayTracker 
                         name={statName}
                         addStat={() => this.handleAdd(statName)} 
                         subStat={() => this.handleSubtract(statName)}
-                        index={i}
+                        key={statName}
                       />
                     );
                   })
