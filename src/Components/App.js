@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../Sass/App.scss';
 import firebase from '../firebase';
-import PlayerSelect from './PlayerSelect';
 import Summary from './Summary';
 import DisplayTracker from './DisplayTracker';
 import AddPlayerForm from './AddPlayerForm';
@@ -20,7 +19,6 @@ class App extends Component {
       allPlayers: [],
       totalPlayers: 0,
       playerName: "",
-      // playerAlias: "vchan",
       playerId: 0,
       position: "",
       allGames: [],
