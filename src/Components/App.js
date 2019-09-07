@@ -6,6 +6,7 @@ import DisplayTracker from './DisplayTracker';
 import AddPlayerForm from './AddPlayerForm';
 import AddGameForm from './AddGameForm';
 import PlayerDropDown from './PlayerDropDown';
+import Graph from './Graph';
 
 class App extends Component {
 
@@ -306,6 +307,7 @@ class App extends Component {
   // Render
   // ======================
   render () {
+    console.log("we are in render!");
     return (
       <div className="App">
         <h1>Ultimistics Tracking App</h1>
@@ -369,6 +371,15 @@ class App extends Component {
             </section>
           </div> {/* end of ./rightCard */}
         </div> {/* end of ./wrapper */}
+
+        <div>
+          <Graph 
+            statsObject={this.state.currStats}
+            label={this.state.currGame}
+          />
+
+
+        </div> 
       </div>
     );
   }
