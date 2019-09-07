@@ -67,7 +67,7 @@ h1 {
     }
 }
 
-.newGame {
+.newData {
     background: $main;
     height: 15%;
     width: 100%;
@@ -94,7 +94,7 @@ h1 {
 }
 
 // RIGHT SIDE NOW
-.counter {
+.rightCard {
     // border: red solid 1px;
     @include flex(column, space-between);
     width: 60%;

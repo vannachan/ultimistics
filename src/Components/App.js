@@ -3,6 +3,10 @@ import '../Sass/App.scss';
 import firebase from '../firebase';
 import PlayerSelect from './PlayerSelect';
 import Summary from './Summary';
+import DisplayTracker from './DisplayTracker';
+import AddPlayerForm from './AddPlayerForm';
+import AddGameForm from './AddGameForm';
+import PlayerDropDown from './PlayerDropDown';
 
 class App extends Component {
 
@@ -175,7 +179,7 @@ class App extends Component {
     };
 
     // Only add new game when the Player is selected
-    if (this.state.playerName != '') {
+    if (this.state.playerName !== '' && this.state.userGame !== '') {
       const dbRef = firebase.database().ref(`${this.state.playerId}/games`);
   
       // NTS: The child of the reference point is set to a number in order to keep the Array structure, if this is set to anything else, the app will break because Firebase will create its own key and turn the Array into an Object when using the simple .push() method
@@ -183,7 +187,9 @@ class App extends Component {
         title: this.state.userGame,
         stats: defaultStats
       });
-    } else {
+    } else if (this.state.playerName == '') {
+      alert("Whoops, a player needs to be selected before a game can be added!");
+    } else if (this.state.userGame == '') {
       alert("Please give a name to this epic game!");
     }
 
@@ -196,7 +202,7 @@ class App extends Component {
   // ======================
   // Handler - Select Position
   // ======================
-  selectPosition = (event) => {
+  handleSelectPosition = (event) => {
     this.setState({
       userPosition: event.target.value
     });
@@ -250,16 +256,12 @@ class App extends Component {
           }
         }]
       });
-
-      this.setState({
-        userPlayer: ''
-      });
-  
-      document.getElementById("addPlayer").reset();
-
+      
       alert(`${newPlayer} added successfully! Select them in the dropdown menu to start tracking!`);
     } else if (!isUnique) {
       alert("Uh oh! Looks like that player is already in the database!");
+    } else if (this.state.userPlayer === '' && this.state.userPosition === '') {
+      alert("Uh oh! We are missing ALLL the info!");
     } else if (this.state.userPlayer === '') {
       alert("Missing name.. everyone's got a name!");
     } else if (this.state.userPosition === '') {
@@ -267,25 +269,13 @@ class App extends Component {
     } else {
       alert("Sorry, we can't add ghost players!");
     }
-  }
 
-  // ======================
-  // Display Stats Counter Section
-  // ======================
-  displayStatsTrack = () => {
-    let tracker = [];
-  
-    for (let key in this.state.currStats) {
-      tracker.push(
-        <li key={key}>
-          <button onClick={() => this.handleAdd(key)}> + </button>
-          <p>{`${key}`}</p>
-          <button onClick={() => this.handleSubtract(key)}> - </button>
-        </li>
-      );
-    }
+    this.setState({
+      userPlayer: '',
+      userPosition: ''
+    });
 
-    return tracker;
+    document.getElementById("addPlayer").reset();
   }
 
   // ======================
@@ -322,28 +312,13 @@ class App extends Component {
       <div className="App">
         <h1>Ultimistics Tracking App</h1>
         <div className="wrapper">
-          <section className="info">
+          <section className="info leftCard">
             <div className="playerInfo">
 
-            <label htmlFor="player">Player:</label>
-            <select 
-              onChange={this.selectPlayer} 
-              name="player" 
-              id="player"
-              defaultValue={'DEFAULT'} 
-            >
-              <option value="DEFAULT" disabled>Select a player</option>
-              {
-                this.state.allPlayers.map( (player, index) => {
-                  return (
-                    <PlayerSelect 
-                      name={player} 
-                      key={index} 
-                    />
-                  );
-                })
-              }
-            </select>
+              <PlayerDropDown 
+                menuChange={this.selectPlayer}
+                allPlayers={this.state.allPlayers}
+              />
 
               <h2>{this.state.playerName}</h2>
               <h3>Position: {this.state.position}</h3>
@@ -359,49 +334,42 @@ class App extends Component {
               </table>
             </div>
 
-            <div className="newGame">
+            <div className="newData">
 
-              <form action="">
-                <input 
-                  type="text" 
-                  onChange={this.handleGameChange}
-                  value={this.state.userGame}
-                  placeholder="Game Title" />
-                <button onClick={this.addGame}>Add new game!</button>
-              </form>
+              <AddGameForm 
+                gameChange={this.handleGameChange}
+                gameVal={this.state.userGame}
+                submit={this.addGame}
+              />
 
-              <form action="" id="addPlayer">
-                <input 
-                  type="text" 
-                  onChange={this.handlePlayerChange}
-                  value={this.state.userPlayer}
-                  placeholder="Player Name" 
-                />
-                <select 
-                  onChange={this.selectPosition}   
-                  name="position" 
-                  id="position" 
-                  defaultValue={'DEFAULT'}
-                >
-                  <option value="DEFAULT" disabled>Choose a position</option>
-                  <option>Handler</option>
-                  <option>Cutter</option>
-                  <option>Hybrid</option>
-                </select>
-
-                <button onClick={this.addPlayer}>Add new player!</button>
-              </form>
+              <AddPlayerForm 
+                nameChange={this.handlePlayerChange}
+                nameVal={this.state.userPlayer}
+                posChange={this.handleSelectPosition}
+                submit={this.addPlayer}
+              />
             </div>
-          </section>
+          </section> {/* end of ./info ./leftCard*/}
   
-          <div className="counter">
+          <div className="rightCard">
             <section className="statsCounter">
               <ul>
-                {this.displayStatsTrack()}
+                {
+                  Object.keys(this.state.currStats).map( (statName, i) => {
+                    return (
+                      <DisplayTracker 
+                        name={statName}
+                        addStat={() => this.handleAdd(statName)} 
+                        subStat={() => this.handleSubtract(statName)}
+                        index={i}
+                      />
+                    );
+                  })
+                }
               </ul>
             </section>
-          </div>
-        </div>
+          </div> {/* end of ./rightCard */}
+        </div> {/* end of ./wrapper */}
       </div>
     );
   }
