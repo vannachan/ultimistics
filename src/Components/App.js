@@ -83,9 +83,22 @@ class App extends Component {
   }
 
   // ======================
+  // Upload Curr Stats to Firebase
+  // ======================
+  uploadStats = () => {
+    const dbRef = firebase.database().ref(`${this.state.playerId}/games/${this.state.currGameId}/stats`);
+
+    // Anddd write it into Firebase
+    dbRef.set(this.state.currStats);
+  }
+
+  // ======================
   // Player Select
   // ======================
   selectPlayer = (event) => {
+
+    // Upload stats to Firebase before we change anything
+    this.uploadStats();
 
     const db = [...this.state.database];
     for (let key in db) {
@@ -144,6 +157,10 @@ class App extends Component {
   // ======================
   addGame = (event) => {
     event.preventDefault();
+
+    // Upload stats to Firebase before we change anything
+    this.uploadStats();
+
     const defaultStats = {
       assists: 0,
       blocks: 0,
@@ -194,6 +211,9 @@ class App extends Component {
   // ======================
   addPlayer = (event) => {
     event.preventDefault();
+
+    // Upload stats to Firebase before we change anything
+    this.uploadStats();
 
     if (this.state.userPlayer !== '' && this.state.userPosition !== '') {
       
@@ -262,34 +282,25 @@ class App extends Component {
   // Add Stats
   // ======================
   handleAdd = (key) => {
-    // Saving local copies of these values
-    const value = this.state.currStats[key];
-    const localStats = this.state.currStats;
-    
-    localStats[key] = value + 1;
+    let newStats = this.state.currStats;
+    newStats[key]++;
 
-    // Referencing a super specific spot to write this new stats object
-    const dbRef = firebase.database().ref(`${this.state.playerId}/games/${this.state.currGameId}/stats`);
-
-    // Anddd write it into Firebase
-    dbRef.set(localStats);
+    this.setState({
+      currStats: newStats
+    });
   }
 
   // ======================
   // Subtract Stats
   // ======================
   handleSubtract = (key) => {
-    const value = this.state.currStats[key];
-    const localStats = this.state.currStats;
-    
-    if (value > 0) {
-      localStats[key] = value - 1;
-
-      // Referencing a super specific spot to write this new stats object
-      const dbRef = firebase.database().ref(`${this.state.playerId}/games/${this.state.currGameId}/stats`);
-
-      // Anddd write it into Firebase
-      dbRef.set(localStats);
+    let newStats = this.state.currStats;
+    if (newStats[key] > 0) {
+      newStats[key]--;
+      
+      this.setState({
+        currStats: newStats
+      });
     }
   }
 
