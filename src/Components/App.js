@@ -138,7 +138,10 @@ class App extends Component {
         const newGameTitle = newGameState[totalGames - 1].title;
         const newGameId = totalGames - 1;
         const newStats = newGameState[totalGames - 1].stats;
-  
+        
+        // Check if this new player has >3 games, if they do, just leave the isSingleGraph var, otherwise, make sure we are only displaying 1 graph
+        const isSingleGraph = (totalGames >= 3) ? this.state.isSingleGraph : true;
+
         this.setState({
           playerId: key,
           position: newPosition,
@@ -147,7 +150,7 @@ class App extends Component {
           currGame: newGameTitle,
           currGameId: newGameId,
           currStats: newStats,
-          isSingleGraph: true
+          isSingleGraph: isSingleGraph
         });
 
       } // end if
