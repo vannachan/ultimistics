@@ -9,13 +9,12 @@ class PlayerDropDown extends Component {
           onChange={this.props.menuChange} 
           name="player" 
           id="player"
-          defaultValue={'DEFAULT'} 
         >
-          <option value="DEFAULT" disabled>Select a player</option>
+          <option disabled>Select a player</option>
           {
             this.props.allPlayers.map( (player, i) => {
               return (
-                <option key={i}>{player}</option>
+                <option key={player}>{player}</option>
               );
             })
           }

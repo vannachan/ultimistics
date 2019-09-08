@@ -6,6 +6,7 @@ import DisplayTracker from './DisplayTracker';
 import AddPlayerForm from './AddPlayerForm';
 import AddGameForm from './AddGameForm';
 import PlayerDropDown from './PlayerDropDown';
+import GameDropDown from './GameDropDown';
 import Graph from './Graph';
 
 class App extends Component {
@@ -16,6 +17,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      isFirstVisit: true,
+
       // general storage states
       database: [],
       allPlayers: [],
@@ -49,6 +52,7 @@ class App extends Component {
   // Component Did Mount
   // ======================
   componentDidMount() {
+    console.log("We just mounted");
     const dbRef = firebase.database().ref();
     
     // Load up the entire database and reload when there are ANY updates
@@ -57,6 +61,10 @@ class App extends Component {
       console.log("This is the resp",response);
 
       let players=[];
+      let newName = "";
+      let newPosition = "";
+      let newPlayerId = 0;
+      let newGameState = [];
 
       for (let key in response) {
         // Populate our full roster of players
@@ -64,9 +72,16 @@ class App extends Component {
       }
 
       // On default, just display the first player on the list
-      const newName = response[0].name;
-      const newPosition = response[0].position;
-      const newGameState = response[0].games;
+      if (this.state.isFirstVisit) {
+        newName = response[0].name;
+        newPosition = response[0].position;
+        newGameState = response[0].games;
+      } else {
+        newName = response[this.state.playerId].name;
+        newPosition = response[this.state.playerId].position;
+        newPlayerId = this.state.playerId;
+        newGameState = response[this.state.playerId].games;
+      }
 
       // Populate our state with some initial information from the last game we had!
       const totalGames = newGameState.length;
@@ -75,11 +90,12 @@ class App extends Component {
       const newStats = newGameState[totalGames - 1].stats;
 
       this.setState({
+        isFirstVisit: false,
         database: response,
         allPlayers: players,
         totalPlayers: players.length,
         playerName: newName,
-        playerId: 0,
+        playerId: newPlayerId,
         position: newPosition,
         allGames: newGameState,
         totalGames: totalGames,
@@ -87,7 +103,6 @@ class App extends Component {
         currGameId: newGameId,
         currStats: newStats
       });
-
     });
   }
 
@@ -102,9 +117,9 @@ class App extends Component {
   }
 
   // ======================
-  // Player Select
+  // Handler - Player Select
   // ======================
-  selectPlayer = (event) => {
+  handleSelectPlayer = (event) => {
 
     // Upload stats to Firebase before we change anything
     this.uploadStats();
@@ -183,6 +198,9 @@ class App extends Component {
       touches: 0
     };
 
+    const newGameName = this.state.userGame;
+    const totalGames = this.state.totalGames;
+
     // Only add new game when the Player is selected
     if (this.state.playerName !== '' && this.state.userGame !== '') {
       const dbRef = firebase.database().ref(`${this.state.playerId}/games`);
@@ -199,7 +217,10 @@ class App extends Component {
     }
 
     this.setState({
-      userGame: '',
+      currGame: newGameName,
+      currGameId: totalGames,
+      currStats: defaultStats,
+      userGame: ''
     });
   }
 
@@ -284,6 +305,28 @@ class App extends Component {
   }
 
   // ======================
+  // Handler - Select Game
+  // ======================
+  handleSelectGame = (event) => {
+    // Upload stats to Firebase before we change anything
+    this.uploadStats();
+
+    let newGameId = 0;
+    let newStats = {};
+    for (let i = 0; i < this.state.allGames.length; i++) {
+      if (event.target.value === this.state.allGames[i].title) {
+        newGameId = i;
+        newStats = this.state.allGames[i].stats;
+      }
+    } 
+    this.setState({
+      currGame: event.target.value,
+      currGameId: newGameId,
+      currStats: newStats
+    });
+  }
+
+  // ======================
   // Add Stats
   // ======================
   handleAdd = (key) => {
@@ -340,6 +383,8 @@ class App extends Component {
     });
   }
 
+  
+
   // ======================
   // Render
   // ======================
@@ -353,7 +398,7 @@ class App extends Component {
             <div className="playerInfo">
 
               <PlayerDropDown 
-                menuChange={this.selectPlayer}
+                menuChange={this.handleSelectPlayer}
                 allPlayers={this.state.allPlayers}
               />
 
@@ -364,7 +409,11 @@ class App extends Component {
             <div className="playerSummary">
               <div className="gameTitle">
                 <h4>Game Summary</h4>
-                <h5>Game Name: {this.state.currGame}</h5>
+                <GameDropDown 
+                  menuChange={this.handleSelectGame}
+                  allGames={this.state.allGames}
+                  gameId={this.state.currGameId}
+                />
               </div>
 
               <SummaryTable 

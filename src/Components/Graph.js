@@ -66,7 +66,7 @@ class Graph extends Component {
     return (
       <div className="graphCard">
         <div className="graphButtonContainer">
-          <button onClick={this.props.gamesClick}>{this.props.numGame ? "Latest Game" : "Last 3 Games"}</button>
+          <button onClick={this.props.gamesClick}>{this.props.numGame ? "Last 3 Games" : "Latest Game"}</button>
           <button onClick={this.props.barClick}>Bar</button>
           <button onClick={this.props.radarClick}>Radar</button>
         </div>
