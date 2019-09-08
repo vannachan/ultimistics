@@ -29,7 +29,8 @@ class App extends Component {
       currStats: {},
       userGame: "",
       userPlayer: "",
-      userPosition: ""
+      userPosition: "",
+      graphType: "bar"
     }
   }
 
@@ -376,6 +377,7 @@ class App extends Component {
           <Graph 
             statsObject={this.state.currStats}
             label={this.state.currGame}
+            type={this.state.graphType}
           />
 
 

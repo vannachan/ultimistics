@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Chart from "chart.js";
 // import classes from "./LineGraph.module.css";
+let myBarGraph;
 
 class Graph extends Component {
   chartRef = React.createRef();
@@ -19,8 +20,10 @@ class Graph extends Component {
     const xAxis = Object.keys(this.props.statsObject);
     const graphData = Object.values(this.props.statsObject);
 
-    new Chart(myChartRef, {
-      type: "bar",
+    if (typeof myBarGraph !== "undefined") myBarGraph.destroy();
+
+    myBarGraph = new Chart(myChartRef, {
+      type: this.props.type,
       data: {
         //Bring in data
         labels: xAxis,
