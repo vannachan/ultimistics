@@ -13,7 +13,7 @@
           "drops": 0,
           "goals": 1,
           "pulls": 0,
-          "stalls": 0,
+          "layouts": 0,
           "throwaways": 2,
           "touches": 10
         }
@@ -28,9 +28,24 @@
           "drops": 2,
           "goals": 2,
           "pulls": 1,
-          "stalls": 0,
+          "layouts": 0,
           "throwaways": 1,
           "touches": 14
+        }
+      },
+      {
+        "title": "Game 3",
+        "stats": {
+          "assists": 1,
+          "blocks": 2,
+          "callahans": 1,
+          "catches": 18, 
+          "drops": 3,
+          "goals": 2,
+          "pulls": 0,
+          "layouts": 1,
+          "throwaways": 3,
+          "touches": 20
         }
       }
     ]
@@ -49,7 +64,7 @@
           "drops": 3,
           "goals": 1,
           "pulls": 1,
-          "stalls": 0,
+          "layouts": 0,
           "throwaways": 2,
           "touches": 22
         }

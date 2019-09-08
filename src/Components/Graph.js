@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Chart from "chart.js";
 // import classes from "./LineGraph.module.css";
-let myBarGraph;
+let myGraph;
 
 class Graph extends Component {
   chartRef = React.createRef();
@@ -17,26 +17,60 @@ class Graph extends Component {
   buildChart = () => {
     const myChartRef = this.chartRef.current.getContext("2d");
 
+    let dataArray = [];
     const xAxis = Object.keys(this.props.statsObject);
-    const graphData = Object.values(this.props.statsObject);
 
-    if (typeof myBarGraph !== "undefined") myBarGraph.destroy();
+    if (this.props.isSingleGraph) {
+      const dataSet1 = Object.values(this.props.statsObject);
+      dataArray.push({
+          label: this.props.label,
+          data: dataSet1,
+          backgroundColor: 'rgba(255,255,0,0.3)',
+          borderColor: 'rgba(255,255,0,1)',
+          borderWidth: 3,
+          pointRadius: 4
+      });
+    } else {
+      // Alright, alright, alright, let's display three datasets!
+      const length = this.props.allGames.length;
+      const dataSet1 = Object.values(this.props.allGames[length-3].stats);
+      const dataSet2 = Object.values(this.props.allGames[length-2].stats);
+      const dataSet3 = Object.values(this.props.allGames[length-1].stats);
+      dataArray.push({
+          label: this.props.allGames[length-3].title,
+          data: dataSet1,
+          backgroundColor: 'rgba(255,255,0,0.3)',
+          borderColor: 'rgba(255,255,0,1)',
+          borderWidth: 3,
+          pointRadius: 4
+        },{
+          label: this.props.allGames[length-2].title,
+          data: dataSet2,
+          backgroundColor: 'rgba(255,0,0,0.3)',
+          borderColor: 'rgba(255,0,0,1)',
+          borderWidth: 3,
+          pointRadius: 4
+        },{
+          label: this.props.allGames[length-1].title,
+          data: dataSet3,
+          backgroundColor: 'rgba(0,255,0,0.3)',
+          borderColor: 'rgba(0,255,0,1)',
+          borderWidth: 3,
+          pointRadius: 4
+      });
 
-    myBarGraph = new Chart(myChartRef, {
+    }
+    console.log("dataArray", dataArray);
+    
+    // If a previous instance is present, destroy it first!
+    if (typeof myGraph !== "undefined") myGraph.destroy();
+
+    myGraph = new Chart(myChartRef, {
       type: this.props.type,
       data: {
         //Bring in data
         labels: xAxis,
-        datasets: [
-          {
-            label: this.props.label,
-            data: graphData,
-            backgroundColor: 'rgba(255,255,0,0.3)',
-            borderColor: 'rgba(255,255,0,1)',
-            borderWidth: 3,
-            pointRadius: 4
-          }
-        ]
+        datasets: dataArray
       },
       options: {
         responsive: true,
@@ -66,7 +100,7 @@ class Graph extends Component {
     return (
       <div className="graphCard">
         <div className="graphButtonContainer">
-          <button onClick={this.props.gamesClick}>{this.props.numGame ? "Last 3 Games" : "Latest Game"}</button>
+          <button onClick={this.props.gamesClick}>{this.props.isSingleGraph ? "Last 3 Games" : "Latest Game"}</button>
           <button onClick={this.props.barClick}>Bar</button>
           <button onClick={this.props.radarClick}>Radar</button>
         </div>

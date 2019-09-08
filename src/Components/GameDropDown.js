@@ -9,13 +9,13 @@ class GameDropDown extends Component {
           onChange={this.props.menuChange} 
           name="game" 
           id="game"
-          value={this.props.gameId} 
+          value={this.props.gameName} 
         >
           <option disabled>Select a game</option>
           {
             this.props.allGames.map((game, i) => {
               return (
-                <option key={i} value={i}>{game.title}</option>
+                <option key={i} value={game.title}>{game.title}</option>
               );
             })
           }

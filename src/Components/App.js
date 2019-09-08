@@ -146,7 +146,8 @@ class App extends Component {
           totalGames: totalGames,
           currGame: newGameTitle,
           currGameId: newGameId,
-          currStats: newStats
+          currStats: newStats,
+          isSingleGraph: true
         });
 
       } // end if
@@ -192,8 +193,8 @@ class App extends Component {
       catches: 0, 
       drops: 0,
       goals: 0,
+      layouts: 0,
       pulls: 0,
-      stalls: 0,
       throwaways: 0,
       touches: 0
     };
@@ -275,8 +276,8 @@ class App extends Component {
             catches: 0, 
             drops: 0,
             goals: 0,
+            layouts: 0,
             pulls: 0,
-            stalls: 0,
             throwaways: 0,
             touches: 0
           }
@@ -377,10 +378,14 @@ class App extends Component {
   }
 
   handleNumGames = () => {
-    let toggle = !this.state.isSingleGraph;
-    this.setState({
-      isSingleGraph: toggle
-    });
+    if (this.state.totalGames >= 3) {
+      let toggle = !this.state.isSingleGraph;
+      this.setState({
+        isSingleGraph: toggle
+      });
+    } else {
+      alert("Not enough game data! Play a couple more games to see this graph!");
+    }
   }
 
   
@@ -412,7 +417,7 @@ class App extends Component {
                 <GameDropDown 
                   menuChange={this.handleSelectGame}
                   allGames={this.state.allGames}
-                  gameId={this.state.currGameId}
+                  gameName={this.state.currGame}
                 />
               </div>
 
@@ -452,7 +457,7 @@ class App extends Component {
                       return (
                         <DisplayTracker 
                           name={statName}
-                          addStat={() => this.handleAdd(statName)} 
+                          addStat={() => this.handleAdd(statName)}
                           subStat={() => this.handleSubtract(statName)}
                           key={statName}
                         />
@@ -462,12 +467,13 @@ class App extends Component {
                 </ul>
               </section>}
   
-              {this.state.isGraphShowing && this.state.isSingleGraph && <Graph 
+              {this.state.isGraphShowing && <Graph 
+                allGames={this.state.allGames}
                 statsObject={this.state.currStats}
                 label={this.state.currGame}
                 type={this.state.graphType}
                 gamesClick={this.handleNumGames}
-                numGame={this.state.isSingleGraph}
+                isSingleGraph={this.state.isSingleGraph}
                 barClick={this.handleBar}
                 radarClick={this.handleRadar}
               />}
