@@ -16,21 +16,32 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      // general storage states
       database: [],
       allPlayers: [],
       totalPlayers: 0,
+
+      // player specific states
       playerName: "",
       playerId: 0,
       position: "",
       allGames: [],
       totalGames: 0,
+
+      // current game states
       currGame: "",
       currGameId: 0,
       currStats: {},
+
+      // user input states
       userGame: "",
       userPlayer: "",
       userPosition: "",
-      graphType: "bar"
+
+      // graph states
+      isGraphShowing: false,
+      graphType: "bar",
+      isSingleGraph: true
     }
   }
 
@@ -50,37 +61,31 @@ class App extends Component {
       for (let key in response) {
         // Populate our full roster of players
         players.push(response[key].name);
+      }
 
-        // Let's see if we can find a player name match
-        if (response[key].name === this.state.playerName) {
+      // On default, just display the first player on the list
+      const newName = response[0].name;
+      const newPosition = response[0].position;
+      const newGameState = response[0].games;
 
-          // Player found, let's store all the game history!
-          const newPosition = response[key].position;
-          const newGameState = response[key].games;
-
-          // Populate our state with some initial information from the last game we had!
-          const totalGames = newGameState.length;
-          const newGameTitle = newGameState[totalGames - 1].title;
-          const newGameId = totalGames - 1;
-          const newStats = newGameState[totalGames - 1].stats;
-    
-          this.setState({
-            playerId: key,
-            position: newPosition,
-            allGames: newGameState,
-            totalGames: totalGames,
-            currGame: newGameTitle,
-            currGameId: newGameId,
-            currStats: newStats
-          });
-
-        } 
-      } // end for-in
+      // Populate our state with some initial information from the last game we had!
+      const totalGames = newGameState.length;
+      const newGameTitle = newGameState[totalGames - 1].title;
+      const newGameId = totalGames - 1;
+      const newStats = newGameState[totalGames - 1].stats;
 
       this.setState({
         database: response,
         allPlayers: players,
-        totalPlayers: players.length
+        totalPlayers: players.length,
+        playerName: newName,
+        playerId: 0,
+        position: newPosition,
+        allGames: newGameState,
+        totalGames: totalGames,
+        currGame: newGameTitle,
+        currGameId: newGameId,
+        currStats: newStats
       });
 
     });
@@ -304,6 +309,37 @@ class App extends Component {
     }
   }
 
+  handleBar = () => {
+    this.setState({
+      graphType: "bar"
+    });
+  }
+
+  handleRadar = () => {
+    this.setState({
+      graphType: "radar"
+    });
+  }
+
+  handleTracker = () => {
+    this.setState({
+      isGraphShowing: false
+    });
+  }
+
+  handleGraph = () => {
+    this.setState({
+      isGraphShowing: true
+    });
+  }
+
+  handleNumGames = () => {
+    let toggle = !this.state.isSingleGraph;
+    this.setState({
+      isSingleGraph: toggle
+    });
+  }
+
   // ======================
   // Render
   // ======================
@@ -353,35 +389,42 @@ class App extends Component {
             </div>
           </section> {/* end of ./info ./leftCard*/}
   
-          <div className="rightCard">
-            <section className="statsCounter">
-              <ul>
-                {
-                  Object.keys(this.state.currStats).map( (statName) => {
-                    return (
-                      <DisplayTracker 
-                        name={statName}
-                        addStat={() => this.handleAdd(statName)} 
-                        subStat={() => this.handleSubtract(statName)}
-                        key={statName}
-                      />
-                    );
-                  })
-                }
-              </ul>
-            </section>
-          </div> {/* end of ./rightCard */}
+          <section className="rightCard">
+            <div className="rightTabs">
+              <button onClick={this.handleTracker} className={`${this.state.isGraphShowing ? "notSelected" : " "}`}>Tracker</button>
+              <button onClick={this.handleGraph} className={`${this.state.isGraphShowing ? " " : "notSelected"}`}>Graph</button>
+            </div>
+
+            <div className="rightContent">
+              {!this.state.isGraphShowing && <section className="statsCounter">
+                <ul>
+                  {
+                    Object.keys(this.state.currStats).map( (statName) => {
+                      return (
+                        <DisplayTracker 
+                          name={statName}
+                          addStat={() => this.handleAdd(statName)} 
+                          subStat={() => this.handleSubtract(statName)}
+                          key={statName}
+                        />
+                      );
+                    })
+                  }
+                </ul>
+              </section>}
+  
+              {this.state.isGraphShowing && this.state.isSingleGraph && <Graph 
+                statsObject={this.state.currStats}
+                label={this.state.currGame}
+                type={this.state.graphType}
+                gamesClick={this.handleNumGames}
+                numGame={this.state.isSingleGraph}
+                barClick={this.handleBar}
+                radarClick={this.handleRadar}
+              />}
+            </div> {/* end of ./rightContent */}
+          </section> {/* end of ./rightCard */}
         </div> {/* end of ./wrapper */}
-
-        <div>
-          <Graph 
-            statsObject={this.state.currStats}
-            label={this.state.currGame}
-            type={this.state.graphType}
-          />
-
-
-        </div> 
       </div>
     );
   }

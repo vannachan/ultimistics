@@ -31,22 +31,51 @@ class Graph extends Component {
           {
             label: this.props.label,
             data: graphData,
+            backgroundColor: 'rgba(255,255,0,0.3)',
+            borderColor: 'rgba(255,255,0,1)',
+            borderWidth: 3,
+            pointRadius: 4
           }
         ]
       },
       options: {
-          //Customize chart options
+        responsive: true,
+        maintainAspectRatio: false,
+        title: {
+          display: true,
+          text: 'Ultimate Frisbee Stats'
+        },
+        tooltips: {
+              callbacks: {
+                  label: function(tooltipItem, data) {
+                      var label = data.datasets[tooltipItem.datasetIndex].label || '';
+  
+                      if (label) {
+                          label += ': ';
+                      }
+                      label += Math.round(tooltipItem.yLabel * 100) / 100;
+                      return label;
+                  }
+              }
+          }
       }
     });
   }
 
   render() {
     return (
-      <div className="barGraph">
-        <canvas
-          id="myChart"
-          ref={this.chartRef}
-        />
+      <div className="graphCard">
+        <div className="graphButtonContainer">
+          <button onClick={this.props.gamesClick}>{this.props.numGame ? "Latest Game" : "Last 3 Games"}</button>
+          <button onClick={this.props.barClick}>Bar</button>
+          <button onClick={this.props.radarClick}>Radar</button>
+        </div>
+        <div className="graphContainer">
+          <canvas
+            id="myChart"
+            ref={this.chartRef}
+          />
+        </div>
       </div>
     )
   }
