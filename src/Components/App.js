@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../Sass/App.scss';
 import firebase from '../firebase';
+import Swal from 'sweetalert2';
 import SummaryTable from './SummaryTable';
 import DisplayTracker from './DisplayTracker';
 import AddPlayerForm from './AddPlayerForm';
@@ -215,9 +216,17 @@ class App extends Component {
         stats: defaultStats
       });
     } else if (this.state.playerName == '') {
-      alert("Whoops, a player needs to be selected before a game can be added!");
+      Swal.fire(
+        'Whoops',
+        'A player needs to be selected before a game can be added!',
+        'error'
+      );
     } else if (this.state.userGame == '') {
-      alert("Please give a name to this epic game!");
+      Swal.fire(
+        'Oops...',
+        'Please give a name to this epic game!',
+        'error'
+      );
     }
 
     this.setState({
@@ -287,17 +296,35 @@ class App extends Component {
         }]
       });
       
-      alert(`${newPlayer} added successfully! Select them in the dropdown menu to start tracking!`);
+      Swal.fire(
+        'Woohoo!',
+        `${newPlayer} was added successfully! Select them in the dropdown menu to start tracking!`,
+        'success'
+      );
     } else if (!isUnique) {
-      alert("Uh oh! Looks like that player is already in the database!");
+      Swal.fire(
+        'Oops...',
+        'Looks like that player is already in the database, find them in the drop down menu!',
+        'error'
+      );
     } else if (this.state.userPlayer === '' && this.state.userPosition === '') {
-      alert("Uh oh! We are missing ALLL the info!");
+      Swal.fire(
+        'Uh oh!',
+        'We are missing <em>ALLL</em> the info! Please add a name and position for the player to be added!',
+        'error'
+      );
     } else if (this.state.userPlayer === '') {
-      alert("Missing name.. everyone's got a name!");
+      Swal.fire(
+        'Oh no!',
+        `Missing name.. everyone's got a name!`,
+        'error'
+      );
     } else if (this.state.userPosition === '') {
-      alert("Pick a position, any position!");
-    } else {
-      alert("Sorry, we can't add ghost players!");
+      Swal.fire(
+        'Oops...',
+        'Pick a position, any position!',
+        'error'
+      );
     }
 
     this.setState({
@@ -387,7 +414,10 @@ class App extends Component {
         isSingleGraph: toggle
       });
     } else {
-      alert("Not enough game data! Play a couple more games to see this graph!");
+      Swal.fire(
+        'Not enough game data!',
+        'Play a couple more games to see this graph!',
+        'error');
     }
   }
 
