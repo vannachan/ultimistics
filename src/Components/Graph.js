@@ -25,8 +25,8 @@ class Graph extends Component {
       dataArray.push({
           label: this.props.label,
           data: dataSet1,
-          backgroundColor: 'rgba(255,255,0,0.3)',
-          borderColor: 'rgba(255,255,0,1)',
+          backgroundColor: 'rgba(255,241,0,0.3)',
+          borderColor: 'rgba(255,241,0,1)',
           borderWidth: 3,
           pointRadius: 4
       });
@@ -39,22 +39,22 @@ class Graph extends Component {
       dataArray.push({
           label: this.props.allGames[length-3].title,
           data: dataSet1,
-          backgroundColor: 'rgba(255,255,0,0.3)',
-          borderColor: 'rgba(255,255,0,1)',
+          backgroundColor: 'rgba(255,113,167,0.3)',
+          borderColor: 'rgba(255,113,167,1)',
           borderWidth: 3,
           pointRadius: 4
         },{
           label: this.props.allGames[length-2].title,
           data: dataSet2,
-          backgroundColor: 'rgba(255,0,0,0.3)',
-          borderColor: 'rgba(255,0,0,1)',
+          backgroundColor: 'rgba(255,241,0,0.3)',
+          borderColor: 'rgba(255,241,0,1)',
           borderWidth: 3,
           pointRadius: 4
         },{
           label: this.props.allGames[length-1].title,
           data: dataSet3,
-          backgroundColor: 'rgba(0,255,0,0.3)',
-          borderColor: 'rgba(0,255,0,1)',
+          backgroundColor: 'rgba(155,249,33,0.3)',
+          borderColor: 'rgba(155,249,33,1)',
           borderWidth: 3,
           pointRadius: 4
       });
