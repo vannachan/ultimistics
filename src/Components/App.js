@@ -190,7 +190,7 @@ class App extends Component {
     this.uploadStats();
 
     const defaultStats = {
-      assists: 1,
+      assists: 0,
       blocks: 0,
       callahans: 0,
       catches: 0, 
@@ -199,7 +199,7 @@ class App extends Component {
       layouts: 0,
       pulls: 0,
       throwaways: 0,
-      touches: 1
+      touches: 0
     };
 
     const newGameName = this.state.userGame;
@@ -294,10 +294,16 @@ class App extends Component {
           }
         }]
       });
+
+      this.setState({
+        userPlayer: '',
+        userPosition: ''
+      });
+      document.getElementById("addPlayer").reset();
       
       Swal.fire(
         'Woohoo!',
-        `${newPlayer} was added successfully! Select them in the dropdown menu to start tracking!`,
+        `<strong>${newPlayer}</strong> was added successfully! Select them in the dropdown menu to start tracking!`,
         'success'
       );
     } else if (!isUnique) {
@@ -306,6 +312,13 @@ class App extends Component {
         'Looks like that player is already in the database, find them in the drop down menu!',
         'error'
       );
+
+      this.setState({
+        userPlayer: '',
+        userPosition: ''
+      });
+
+      document.getElementById("addPlayer").reset();
     } else if (this.state.userPlayer === '' && this.state.userPosition === '') {
       Swal.fire(
         'Ghost Detected! 👻',
@@ -325,13 +338,6 @@ class App extends Component {
         'error'
       );
     }
-
-    this.setState({
-      userPlayer: '',
-      userPosition: ''
-    });
-
-    document.getElementById("addPlayer").reset();
   }
 
   // ======================
