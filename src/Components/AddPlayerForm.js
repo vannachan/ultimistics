@@ -8,19 +8,21 @@ class AddPlayerForm extends Component {
           type="text" 
           onChange={this.props.nameChange}
           value={this.props.nameVal}
-          placeholder="Player Name" 
+          placeholder="New Player Name" 
         />
-        <select 
-          onChange={this.props.posChange}   
-          name="position" 
-          id="position" 
-          defaultValue={'DEFAULT'}
-        >
-          <option value="DEFAULT" disabled>Choose a position</option>
-          <option>Handler</option>
-          <option>Cutter</option>
-          <option>Hybrid</option>
-        </select>
+        <span className="playerPosDropDown">
+          <select 
+            onChange={this.props.posChange}   
+            name="position" 
+            id="position" 
+            defaultValue={'DEFAULT'}
+          >
+            <option value="DEFAULT" disabled>Choose a position</option>
+            <option>Handler</option>
+            <option>Cutter</option>
+            <option>Hybrid</option>
+          </select>
+        </span>
 
         <button onClick={this.props.submit}>Add new player!</button>
       </form>

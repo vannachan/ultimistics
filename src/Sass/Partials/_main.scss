@@ -8,10 +8,11 @@ body {
 
 .wrapper {
     // border: red solid 1px;
+    @include flex(row, space-between);
     width: 85%;
     height: 80vh;
     margin: 0 auto;
-    @include flex(row, space-between);
+    padding-bottom: 15px;
 }
 
 .leftCard {
