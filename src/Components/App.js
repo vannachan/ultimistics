@@ -53,7 +53,6 @@ class App extends Component {
   // Component Did Mount
   // ======================
   componentDidMount() {
-    console.log("We just mounted");
     const dbRef = firebase.database().ref();
     
     // Load up the entire database and reload when there are ANY updates
@@ -191,7 +190,7 @@ class App extends Component {
     this.uploadStats();
 
     const defaultStats = {
-      assists: 0,
+      assists: 1,
       blocks: 0,
       callahans: 0,
       catches: 0, 
@@ -200,7 +199,7 @@ class App extends Component {
       layouts: 0,
       pulls: 0,
       throwaways: 0,
-      touches: 0
+      touches: 1
     };
 
     const newGameName = this.state.userGame;
@@ -215,6 +214,13 @@ class App extends Component {
         title: this.state.userGame,
         stats: defaultStats
       });
+
+      this.setState({
+        currGame: newGameName,
+        currGameId: totalGames,
+        currStats: defaultStats,
+        userGame: ''
+      });
     } else if (this.state.playerName == '') {
       Swal.fire(
         'Whoops',
@@ -228,13 +234,6 @@ class App extends Component {
         'error'
       );
     }
-
-    this.setState({
-      currGame: newGameName,
-      currGameId: totalGames,
-      currStats: defaultStats,
-      userGame: ''
-    });
   }
 
   
@@ -309,8 +308,8 @@ class App extends Component {
       );
     } else if (this.state.userPlayer === '' && this.state.userPosition === '') {
       Swal.fire(
-        'Uh oh!',
-        'We are missing <em>ALLL</em> the info! Please add a name and position for the player to be added!',
+        'Ghost Detected! 👻',
+        `We are missing <em>ALLL</em> the info! We can't add a ghost player to the database!`,
         'error'
       );
     } else if (this.state.userPlayer === '') {
