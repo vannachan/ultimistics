@@ -1,21 +1,20 @@
 body {
-    background: $background;
-}
-
-h1 {
-    text-align: left;
-    padding-left: 10%;
+    background: linear-gradient(
+        to bottom left, 
+        rgba(255,149,98,0.7),
+        rgba(255,211,22,0.7)
+    )
 }
 
 .wrapper {
     // border: red solid 1px;
-    width: 80%;
+    width: 85%;
     height: 80vh;
     margin: 0 auto;
     @include flex(row, space-between);
 }
 
-.info {
+.leftCard {
     // border: blue solid 1px;
     @include flex(column, space-between);
     width: 30%;
@@ -84,10 +83,17 @@ h1 {
     }
 
     input {
-        background: rgba($background, 0.9);
+        background: $main;
+        border: 2px solid transparent;
+        border-image: linear-gradient(
+            to top left,
+            #ff9562,
+            #ffd316
+        );
+        border-image-slice: 1;
+
         text-align: center;
         outline: none;
-        border: none;
         padding: 5px 7px;
         margin-bottom: 3px;
     }
@@ -103,22 +109,23 @@ h1 {
 }
 
 .rightTabs {
-    @include flex(row, flex-start);
+    @include flex(row, flex-start, flex-start);
     width: 100%;
     height: 5%;
+    // border: 1px solid red;
 
     button {
         background: $main;
         border-radius: 10px 10px 0 0;
         border: none;
-        height: 100%;
+        height: 90%;
         padding: 0 20px;
         margin-right: 3px;
-        border-bottom: 3px solid $main;
+        box-shadow: 0 3px 0 $main;
     }
 
     .notSelected {
-        border-bottom: 3px solid $background;
+        box-shadow: 0 3px 0 transparent;
     }
 }
 
@@ -141,15 +148,27 @@ h1 {
     }
     
     li {
-        margin: 5px;
-        border: 2px black solid;
-        border-radius: 10px;
-        @include flex(row, space-evenly);
-        width: 40%;
-    }
+        width: 45%;
+        height: 13%;
+        @include flex(row);
 
-    p {
-        padding: 15px 0;
+        background-image: linear-gradient(
+            to top left,
+            #ff9562,
+            #ffd316
+        );
+        border-radius: 40px;
+        box-sizing: border-box;
+        padding: 3px;
+        
+        .indivStat {
+            @include flex(row, space-evenly);
+            background: $main;
+            border-radius: 40px;
+            width: 100%;
+            height: 100%;
+            transition: background .5s ease;
+        }
     }
 
     button {
@@ -173,12 +192,14 @@ h1 {
 }
 
 .graphContainer {
-    @include flex(row, center)
+    @include flex(row, center);
     // border: 1px red solid;
     width: 90%;
     height: 80%;
 }
 
-canvas {
+footer {
+    @include flex(row, center);
+    height: 5vh;
     // border: 1px red solid;
 }

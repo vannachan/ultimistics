@@ -12,11 +12,11 @@ $baseFont: 'Montserrat', sans-serif;
 //====================
 // Mixins
 //====================
-@mixin flex($direction, $justContent: center) {
+@mixin flex($direction, $justContent: center, $alignItems: center) {
   display: flex;
   flex-direction: $direction;
   justify-content: $justContent;
-  align-items: center;
+  align-items: $alignItems;
 }
 
 @mixin fontStyle($size, $lh, $color, $fam: $body, $weight: 400) {

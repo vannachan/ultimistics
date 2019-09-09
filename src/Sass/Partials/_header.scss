@@ -1,0 +1,48 @@
+header {
+  @include flex(row);
+  height: 15vh;
+}
+
+.headerWrapper {
+  @include flex(row, space-between);
+  width: 85%;
+}
+
+h1 {
+  text-align: left;
+  width: 50%;
+  // padding-left: 10%;
+  // border: 1px solid red;
+}
+
+.addPlayerForm {
+  // border: 1px solid red;
+  width: 45%;
+
+  select {
+    // Get rid of default arrow
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+
+    background: rgba($main, 0.5);
+    // border-radius: 10px;
+    height: 30px;
+    // outline: none;
+    border: 3px solid $main;
+    width: 40%;
+    padding-left: 5px;
+  }
+
+  input {
+    background: $main;
+    height: 30px;
+    border: 2px solid $main;
+    outline: none;
+    text-align: left;
+    padding: 0 7px;
+    margin-bottom: 3px;
+    margin-right: 3px;
+  }
+}

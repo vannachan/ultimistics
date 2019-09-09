@@ -60,7 +60,6 @@ class Graph extends Component {
       });
 
     }
-    console.log("dataArray", dataArray);
     
     // If a previous instance is present, destroy it first!
     if (typeof myGraph !== "undefined") myGraph.destroy();

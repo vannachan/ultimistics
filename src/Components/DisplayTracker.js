@@ -4,9 +4,11 @@ class DisplayTracker extends Component {
   render () {
     return(
       <li>
-        <button onClick={this.props.addStat}> + </button>
-        <p>{`${this.props.name}`}</p>
-        <button onClick={this.props.subStat}> - </button>
+        <div className="indivStat">
+          <button onClick={this.props.addStat}> + </button>
+          <p>{`${this.props.name}`}</p>
+          <button onClick={this.props.subStat}> - </button>
+        </div>
       </li>
       
     );

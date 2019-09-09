@@ -12,9 +12,9 @@ import Graph from './Graph';
 
 class App extends Component {
 
-  // ======================
+  // ============================================
   // Constructor
-  // ======================
+  // ============================================
   constructor() {
     super();
     this.state = {
@@ -47,11 +47,11 @@ class App extends Component {
       graphType: "bar",
       isSingleGraph: true
     }
-  }
+  } // end of constructor()
 
-  // ======================
+  // ============================================
   // Component Did Mount
-  // ======================
+  // ============================================
   componentDidMount() {
     const dbRef = firebase.database().ref();
     
@@ -104,11 +104,11 @@ class App extends Component {
         currStats: newStats
       });
     });
-  }
+  } // end of componentDidMount()
 
-  // ======================
-  // Upload Curr Stats to Firebase
-  // ======================
+  // ============================================
+  // Upload Current Stats to Firebase🔥
+  // ============================================
   uploadStats = () => {
     const dbRef = firebase.database().ref(`${this.state.playerId}/games/${this.state.currGameId}/stats`);
 
@@ -116,9 +116,9 @@ class App extends Component {
     dbRef.set(this.state.currStats);
   }
 
-  // ======================
+  // ============================================
   // Handler - Player Select
-  // ======================
+  // ============================================
   handleSelectPlayer = (event) => {
 
     // Upload stats to Firebase before we change anything
@@ -160,30 +160,21 @@ class App extends Component {
       playerName: event.target.value,
       playerId: event.target.options.selectedIndex - 1
     });
-  }
+  } // end of handleSelectPlayer()
 
-  // ======================
-  // Handler -  Game Input Change
-  // ======================
+  // ============================================
+  // Handler -  New Game Input Change
+  // ============================================
   handleGameChange = (event) => {
     this.setState({
       userGame: event.target.value
     });
   }
 
-  // ======================
-  // Handler - Name Input Change
-  // ======================
-  handlePlayerChange = (event) => {
-    this.setState({
-      userPlayer: event.target.value
-    });
-  }
-
-  // ======================
-  // Add Game
-  // ======================
-  addGame = (event) => {
+  // ============================================
+  // Handler - Add New Game to Firebase
+  // ============================================
+  handleAddGame = (event) => {
     event.preventDefault();
 
     // Upload stats to Firebase before we change anything
@@ -234,26 +225,34 @@ class App extends Component {
         'error'
       );
     }
+  } // end of handleAddGame()
+
+  // ============================================
+  // Handler - New Player Name Input Change
+  // ============================================
+  handlePlayerChange = (event) => {
+    this.setState({
+      userPlayer: event.target.value
+    });
   }
 
-  
-  // ======================
-  // Handler - Select Position
-  // ======================
+  // ============================================
+  // Handler - New Player Position Input Change
+  // ============================================
   handleSelectPosition = (event) => {
     this.setState({
       userPosition: event.target.value
     });
   }
 
-  // ======================
-  // Add Player
-  // ======================
+  // ============================================
+  // Handler - Add New Player to Firebase
+  // ============================================
   // FIXME: Couldn't seem to figure out how to load the page after a new player was added, so for now the user has to select this new player from the dropdown menu
   // - Look into how this.setState is used as a synchronous event
   // - I was able to load the state but the check done in ComponentDidMount() didn't populate with the latest player's info...
-  // ======================
-  addPlayer = (event) => {
+  // ============================================
+  handlerAddPlayer = (event) => {
     event.preventDefault();
 
     // Upload stats to Firebase before we change anything
@@ -338,11 +337,11 @@ class App extends Component {
         'error'
       );
     }
-  }
+  } // end of handlerAddPlayer()
 
-  // ======================
+  // ============================================
   // Handler - Select Game
-  // ======================
+  // ============================================
   handleSelectGame = (event) => {
     // Upload stats to Firebase before we change anything
     this.uploadStats();
@@ -362,9 +361,9 @@ class App extends Component {
     });
   }
 
-  // ======================
-  // Add Stats
-  // ======================
+  // ============================================
+  // Handler - Stat Addition
+  // ============================================
   handleAdd = (key) => {
     let newStats = this.state.currStats;
     newStats[key]++;
@@ -374,9 +373,9 @@ class App extends Component {
     });
   }
 
-  // ======================
-  // Subtract Stats
-  // ======================
+  // ============================================
+  // Handler - Stat Subtraction
+  // ============================================
   handleSubtract = (key) => {
     let newStats = this.state.currStats;
     if (newStats[key] > 0) {
@@ -388,30 +387,45 @@ class App extends Component {
     }
   }
 
+  // ============================================
+  // Handler - Select Bar Graph
+  // ============================================
   handleBar = () => {
     this.setState({
       graphType: "bar"
     });
   }
 
+  // ============================================
+  // Handler - Select Radar Graph
+  // ============================================
   handleRadar = () => {
     this.setState({
       graphType: "radar"
     });
   }
 
+  // ============================================
+  // Handler - Select Tracker UI
+  // ============================================
   handleTracker = () => {
     this.setState({
       isGraphShowing: false
     });
   }
 
+  // ============================================
+  // Handler - Select Graph UI
+  // ============================================
   handleGraph = () => {
     this.setState({
       isGraphShowing: true
     });
   }
 
+  // ============================================
+  // Handler - Toggle between Latest and Last 3 Games
+  // ============================================
   handleNumGames = () => {
     if (this.state.totalGames >= 3) {
       let toggle = !this.state.isSingleGraph;
@@ -426,16 +440,25 @@ class App extends Component {
     }
   }
 
-  
-
-  // ======================
+  // ============================================
   // Render
-  // ======================
+  // ============================================
   render () {
     console.log("we are in render!");
     return (
       <div className="App">
-        <h1>Ultimistics Tracking App</h1>
+        <header>
+          <div className="headerWrapper">
+              <h1>Ultimistics Tracking App</h1>
+              <AddPlayerForm 
+                nameChange={this.handlePlayerChange}
+                nameVal={this.state.userPlayer}
+                posChange={this.handleSelectPosition}
+                submit={this.handlerAddPlayer}
+              />
+          </div>
+        </header>
+
         <div className="wrapper">
           <section className="info leftCard">
             <div className="playerInfo">
@@ -465,18 +488,10 @@ class App extends Component {
             </div>
 
             <div className="newData">
-
               <AddGameForm 
                 gameChange={this.handleGameChange}
                 gameVal={this.state.userGame}
-                submit={this.addGame}
-              />
-
-              <AddPlayerForm 
-                nameChange={this.handlePlayerChange}
-                nameVal={this.state.userPlayer}
-                posChange={this.handleSelectPosition}
-                submit={this.addPlayer}
+                submit={this.handleAddGame}
               />
             </div>
           </section> {/* end of ./info ./leftCard*/}
@@ -518,6 +533,10 @@ class App extends Component {
             </div> {/* end of ./rightContent */}
           </section> {/* end of ./rightCard */}
         </div> {/* end of ./wrapper */}
+
+        <footer>
+          <p>Coded and designed by <a href="https://twitter.com/_vannachan" target="_blank">Vanna Chan</a> © 2019</p>
+        </footer>
       </div>
     );
   }
