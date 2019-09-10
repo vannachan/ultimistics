@@ -48,12 +48,16 @@
     @include fontStyle(1.4rem, 1.4rem, $primaryText, $baseFont, 400);
   }
 
-  p {
-    @include fontStyle(1.5rem, 1.5rem, $primaryText, $baseFont, 400);
+  button {
+    &.add,
+    &.subtract {
+      @include fontStyle(1.5rem, 1.5rem, $primaryText, $baseFont, 400);
+    }
   }
 
+  p,
   table {
-    @include fontStyle(1.5rem, 1.5rem, $primaryText, $baseFont);
+    @include fontStyle(1.5rem, 1.5rem, $primaryText, $baseFont, 400);
   }
 
   .leftCard {
@@ -303,7 +307,6 @@
     input {
       margin-right: 10px;;
     }
-    
   }
 } // end of 550px
 
@@ -345,7 +348,6 @@
     }
   
     .typeButtons {
-  
       button {
         width: 60px;
       }
@@ -360,6 +362,12 @@
 
 //Even smaller
 @media (max-width: 380px) {
+  .headerWrapper,
+  .wrapper {
+    width: 86%;
+    margin-left: 3%;
+  }
+
   select,
   option,
   input,
@@ -368,13 +376,69 @@
     @include fontStyle(1.1rem, 1.2rem, $primaryText, $baseFont, 400);
   }
 
-  // a {
-  //   @include fontStyle(1rem, 1.2rem, $main, $baseFont, 400);
-  // }
+  .rightCard {
+    height: 570px;
+  }
 
+  .statsCounter {
+    height: 100%;
+  
+    ul {
+      height: 100%;
+      padding: 10px 0;
+      @include flex(column, space-evenly);
+      flex-wrap: no-wrap;
+    }
+
+    li {
+      width: 80%;
+      height: 8%;
+
+      p {
+        @include fontStyle(1.3rem, 1.2rem, $primaryText, $baseFont, 400);
+      }
+    }
+
+    button {
+      width: 40px;
+      height: 20px;
+    }
+  }
+  
+  .addPlayerForm {
+    padding-top: 10px;
+
+    .newPlayerPosDropDown,
+    input {
+      width: 48%;
+      margin: 0;
+    }
+
+    input {
+      margin-right: 4%;
+    }
+  }
 } // end of 380px
 
 //teeny phones aka iphone5
 @media (max-width: 320px) {
+  header {
+    height: 70px;
+    position: initial;
 
+    h1 {
+      position: initial;
+      writing-mode: horizontal-tb;
+    }
+  }
+
+  .headerWrapper,
+  .wrapper {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .leftCard {
+    margin-top: 0;
+  }
 } // end of 320px
