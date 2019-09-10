@@ -1,7 +1,3 @@
-*{
-  // border: 1px red solid;
-}
-
 body {
   background: linear-gradient(
     to bottom left, 
@@ -84,6 +80,7 @@ body {
   }
 }
 
+// ADD GAME SECTION
 .newGameContainer {
   background: $main;
   height: 15%;
@@ -137,11 +134,12 @@ body {
     height: 90%;
     padding: 0 20px;
     margin-right: 3px;
-    box-shadow: 0 3px 0 $main;
+    box-shadow: 0 10px 0 $main;
+    transition: none;
   }
 
   .notSelected {
-    box-shadow: 0 3px 0 transparent;
+    box-shadow: 0 10px 0 transparent;
 
     &:hover,
     &:focus {
@@ -237,7 +235,6 @@ body {
 
 .graphContainer {
   @include flex(row, center);
-  // border: 1px red solid;
   width: 90%;
   height: 80%;
 }

@@ -25,15 +25,10 @@ h2 {
 
 h3 {
   @include fontStyle(1.6rem, 2.5rem, $primaryText, $baseFont, 500);
-
 }
 
 h4 {
   @include fontStyle(1.8rem, 2.5rem, $primaryText, $baseFont, 500);
-}
-
-h5 {
-  @include fontStyle(1.6rem, 2.5rem, $primaryText, $baseFont, 400);
 }
 
 p,
