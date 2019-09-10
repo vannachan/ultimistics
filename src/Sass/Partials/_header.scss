@@ -4,13 +4,6 @@ header {
 }
 
 .headerWrapper {
-  @include flex(row, space-between);
   width: 85%;
-}
-
-h1 {
-  text-align: left;
-  width: 50%;
-  // padding: 0;
 }
 

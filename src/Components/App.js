@@ -449,7 +449,7 @@ class App extends Component {
       <div className="App">
         <header>
           <div className="headerWrapper">
-              <h1>Ultimistics Tracking App</h1>
+              <h1>Ultimistics</h1>
           </div>
         </header>
 
@@ -492,8 +492,8 @@ class App extends Component {
   
           <section className="rightCard">
             <div className="rightTabs">
-              <button onClick={this.handleTracker} className={`${this.state.isGraphShowing ? "notSelected" : " "}`}>Tracker</button>
-              <button onClick={this.handleGraph} className={`${this.state.isGraphShowing ? " " : "notSelected"}`}>Graph</button>
+              <button onClick={this.handleTracker} className={`${this.state.isGraphShowing ? "notSelected tab" : "tab"}`}>Tracker</button>
+              <button onClick={this.handleGraph} className={`${this.state.isGraphShowing ? "tab" : "notSelected tab"}`}>Graph</button>
             </div>
 
             <div className="rightContent">

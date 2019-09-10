@@ -23,7 +23,7 @@ select {
   // Get rid of default arrow
   text-indent: 0.01px;
   text-overflow: '';
-  -webkit-appearance: button; /* hide default arrow in chrome OSX */
+  -webkit-appearance: button;
 
   background: rgba($main, 0);
   border: none;

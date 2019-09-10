@@ -5,12 +5,15 @@ button {
   border: 1px solid $accent;
   border-radius: 5px;
   background-position: center;
-  transition: background 0.5s;
+  transition: all 0.5s;
 }
 
 button:hover,
 button:focus {
   background: $accent radial-gradient(circle, transparent 1%, $accent 1%) center/15000%;
+  &:not(.tab) {
+    color: $main;
+  }
 }
 
 button:active {

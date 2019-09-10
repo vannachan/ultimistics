@@ -30,7 +30,7 @@ body {
 
   .dropDownContainer {
     margin-left: 10px;
-    max-width: 70%;
+    width: 70%;
   }
 }
 
@@ -46,10 +46,15 @@ body {
 
 .playerSummary {
   @include flex(column, space-evenly);
+  background: rgba($main, 0.3);
   width: 100%;
   height: 65%;
   border-left: 5px solid $main;
   border-right: 5px solid $main;
+
+  .selectGame {
+    width: 100%;
+  }
   
   .gameTitle {
     @include flex(column, space-evenly);
@@ -176,12 +181,20 @@ body {
     padding: 3px;
     
     .indivStat {
-      @include flex(row, space-evenly);
+      @include flex(row, space-between);
       background: $main;
       border-radius: 40px;
       width: 100%;
       height: 100%;
       transition: background .5s ease;
+    }
+
+    .add {
+      margin-left: 20px;
+    }
+
+    .subtract {
+      margin-right: 20px;
     }
   }
 
