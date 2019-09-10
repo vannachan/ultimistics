@@ -450,12 +450,6 @@ class App extends Component {
         <header>
           <div className="headerWrapper">
               <h1>Ultimistics Tracking App</h1>
-              <AddPlayerForm 
-                nameChange={this.handlePlayerChange}
-                nameVal={this.state.userPlayer}
-                posChange={this.handleSelectPosition}
-                submit={this.handlerAddPlayer}
-              />
           </div>
         </header>
 
@@ -487,7 +481,7 @@ class App extends Component {
               />
             </div>
 
-            <div className="newData">
+            <div className="newGameContainer">
               <AddGameForm 
                 gameChange={this.handleGameChange}
                 gameVal={this.state.userGame}
@@ -531,8 +525,18 @@ class App extends Component {
                 radarClick={this.handleRadar}
               />}
             </div> {/* end of ./rightContent */}
+
+            <AddPlayerForm 
+              nameChange={this.handlePlayerChange}
+              nameVal={this.state.userPlayer}
+              posChange={this.handleSelectPosition}
+              submit={this.handlerAddPlayer}
+            />
+            
           </section> {/* end of ./rightCard */}
         </div> {/* end of ./wrapper */}
+
+        
 
         <footer>
           <p>Coded and designed by <a href="https://twitter.com/_vannachan" target="_blank">Vanna Chan</a> © 2019</p>

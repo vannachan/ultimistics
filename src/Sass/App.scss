@@ -1,8 +1,11 @@
 @import './Partials/setup';
 @import './Partials/variablesAndMixins';
 @import './Partials/typography';
+@import './Partials/dropDown';
+@import './Partials/buttons';
 @import './Partials/header';
 @import './Partials/main';
+@import './Partials/footer';
 
 .App {
   text-align: center;

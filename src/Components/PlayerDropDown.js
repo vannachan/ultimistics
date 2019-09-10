@@ -5,20 +5,22 @@ class PlayerDropDown extends Component {
     return(
       <div className="selectPlayer">
         <label htmlFor="player">Player:</label>
-        <select 
-          onChange={this.props.menuChange} 
-          name="player" 
-          id="player"
-        >
-          <option disabled>Select a player</option>
-          {
-            this.props.allPlayers.map( (player, i) => {
-              return (
-                <option key={player}>{player}</option>
-              );
-            })
-          }
-        </select>
+        <span className="dropDownContainer playerDropDown">
+          <select 
+            onChange={this.props.menuChange} 
+            name="player" 
+            id="player"
+          >
+            <option disabled>Select a player</option>
+            {
+              this.props.allPlayers.map( (player, i) => {
+                return (
+                  <option key={player}>{player}</option>
+                );
+              })
+            }
+          </select>
+        </span>
       </div>
     );
   }

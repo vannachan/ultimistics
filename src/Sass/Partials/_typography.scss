@@ -15,12 +15,11 @@ body {
 //====================
 h1 {
   @include fontStyle(3rem, 4rem, $main, $baseFont, 500);
-  padding: 20px;
 }
 
 h2 {
   @include fontStyle(2.5rem, 2.8rem, black, $baseFont, 500);
-  padding: 20px;
+  padding: 5px 0;
 }
 
 h3 {
@@ -37,5 +36,15 @@ h4 {
 h5 {
   @include fontStyle(1.6rem, 2.5rem, black, $baseFont, 400);
   
+}
+
+a {
+  @include fontStyle(1.6rem, 2.5rem, $main, $baseFont, 500);
+  transition: all 0.5s;
+
+  &:hover,
+  &:focus {
+    text-shadow: 1px 1px 0 black;
+  }
 }
 

@@ -99,9 +99,11 @@ class Graph extends Component {
     return (
       <div className="graphCard">
         <div className="graphButtonContainer">
-          <button onClick={this.props.gamesClick}>{this.props.isSingleGraph ? "Last 3 Games" : "Latest Game"}</button>
-          <button onClick={this.props.barClick}>Bar</button>
-          <button onClick={this.props.radarClick}>Radar</button>
+          <button onClick={this.props.gamesClick} className="numGameButton">{this.props.isSingleGraph ? "Last 3 Games" : "Latest Game"}</button>
+          <div className="typeButtons">
+            <button onClick={this.props.barClick}>Bar</button>
+            <button onClick={this.props.radarClick}>Radar</button>
+          </div>
         </div>
         <div className="graphContainer">
           <canvas

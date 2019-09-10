@@ -10,7 +10,7 @@ class AddPlayerForm extends Component {
           value={this.props.nameVal}
           placeholder="New Player Name" 
         />
-        <span className="playerPosDropDown">
+        <span className="newPlayerPosDropDown dropDownContainer">
           <select 
             onChange={this.props.posChange}   
             name="position" 

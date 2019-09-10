@@ -1,206 +1,259 @@
+*{
+  // border: 1px red solid;
+}
+
 body {
-    background: linear-gradient(
-        to bottom left, 
-        rgba(255,149,98,0.7),
-        rgba(255,211,22,0.7)
-    )
+  background: linear-gradient(
+    to bottom left, 
+    rgba(255,149,98,0.7),
+    rgba(255,211,22,0.7)
+  );
 }
 
 .wrapper {
-    // border: red solid 1px;
-    @include flex(row, space-between);
-    width: 85%;
-    height: 80vh;
-    margin: 0 auto;
-    padding-bottom: 15px;
+  @include flex(row, space-between, flex-start);
+  width: 85%;
+  height: 83vh;
+  margin: 0 auto;
+}
+
+// =====================
+// LEFT SIDE
+// =====================
+.leftCard,
+.rightCard {
+  height: 95%;
 }
 
 .leftCard {
-    // border: blue solid 1px;
-    @include flex(column, space-between);
-    width: 30%;
-    height: 100%;
+  width: 30%;
+
+  .dropDownContainer {
+    margin-left: 10px;
+    max-width: 70%;
+  }
 }
 
 .playerInfo {
-    background: $main;
-    width: 100%;
-    height: 25%;
-    margin: 0 auto;
-    padding: 10px;
-    border-radius: 25px 25px 0 0;
+  background: $main;
+  width: 100%;
+  height: 20%;
+  margin: 0 auto;
+  padding: 10px;
+  border-radius: 25px 25px 0 0;
+  overflow: hidden;
 }
 
 .playerSummary {
-    @include flex(column);
-    width: 100%;
-    height: 60%;
-    border-left: 5px solid $main;
-    border-right: 5px solid $main;
-    
-    .gameTitle {
-        @include flex(column);
-        width: 100%;
-        height: 25%;
-        border-bottom: 5px solid $main;
-        // border-top: 5px black solid;
-    }
-
-    table {
-        // border: red 3px solid;
-        width: 100%;
-    }
-
-    tr:nth-child(even) {
-        background: $main;
-    }
-
-    th {
-        // border: red 1px solid;
-        text-align: left;
-        padding-left: 10px;
-        width: 85%;
-    }
-    
-    td {
-        width: 15%;
-    }
-}
-
-.newData {
-    background: $main;
-    height: 15%;
-    width: 100%;
-    border-radius: 0 0 25px 25px;
-    
-    form {
-        @include flex(column);
-        height: 100%;
-    }
-
-    button,
-    input {
-        width: 70%;
-    }
-
-    input {
-        background: $main;
-        border: 2px solid transparent;
-        border-image: linear-gradient(
-            to top left,
-            #ff9562,
-            #ffd316
-        );
-        border-image-slice: 1;
-
-        text-align: center;
-        outline: none;
-        padding: 5px 7px;
-        margin-bottom: 3px;
-    }
-}
-
-// RIGHT SIDE NOW
-.rightCard {
-    // border: red solid 1px;
-    
+  @include flex(column, space-evenly);
+  width: 100%;
+  height: 65%;
+  border-left: 5px solid $main;
+  border-right: 5px solid $main;
+  
+  .gameTitle {
     @include flex(column, space-evenly);
-    width: 60%;
+    width: 100%;
+    height: calc(25% - 5px);
+    border-bottom: 5px solid $main;
+  }
+
+  table {
+    width: 100%;
+    height: 75%;
+  }
+
+  tr:nth-child(even) {
+    background: $main;
+  }
+
+  th {
+    text-align: left;
+    padding-left: 10px;
+    width: 85%;
+  }
+  
+  td {
+    width: 15%;
+  }
+}
+
+.newGameContainer {
+  background: $main;
+  height: 15%;
+  width: 100%;
+  border-radius: 0 0 25px 25px;
+  
+  form {
+    @include flex(column);
     height: 100%;
+  }
+
+  button,
+  input {
+    width: 70%;
+    padding: 5px 7px;
+  }
+
+  input {
+    background: $main;
+    border: 2px solid transparent;
+    border-image: linear-gradient(
+      to top left,
+      #ff9562,
+      #ffd316
+    );
+    border-image-slice: 1;
+
+    text-align: center;
+    outline: none;
+    margin-bottom: 3px;
+  }
+}
+
+// =====================
+// RIGHT SIDE
+// =====================
+.rightCard {
+  @include flex(column, space-evenly);
+  width: 60%;
 }
 
 .rightTabs {
-    @include flex(row, flex-start, flex-start);
-    width: 100%;
-    height: 5%;
-    // border: 1px solid red;
+  @include flex(row, flex-start, flex-start);
+  width: 100%;
+  height: 5%;
 
-    button {
-        background: $main;
-        border-radius: 10px 10px 0 0;
-        border: none;
-        height: 90%;
-        padding: 0 20px;
-        margin-right: 3px;
-        box-shadow: 0 3px 0 $main;
-    }
+  button {
+    background: $main;
+    border-radius: 10px 10px 0 0;
+    border: none;
+    height: 90%;
+    padding: 0 20px;
+    margin-right: 3px;
+    box-shadow: 0 3px 0 $main;
+  }
 
-    .notSelected {
-        box-shadow: 0 3px 0 transparent;
+  .notSelected {
+    box-shadow: 0 3px 0 transparent;
+
+    &:hover,
+    &:focus {
+      background: darken($main, 5);
     }
+  }
 }
 
 .rightContent {
-    background: $main;
-    border-radius: 0 25px 25px 25px;
-    width: 100%;
-    height: 95%;
+  background: $main;
+  border-radius: 0 25px 25px 25px;
+  width: 100%;
+  height: 87%;
 }
 
 .statsCounter {
+  height: 100%;
+
+  ul {
     height: 100%;
+    padding: 20px 0;
+    @include flex(row, space-evenly);
+    flex-wrap: wrap;
+  }
+  
+  li {
+    width: 45%;
+    height: 13%;
+    @include flex(row);
 
-    ul {
-        // border: 3px red solid;
-        height: 100%;
-        padding: 20px 0;
-        @include flex(row, space-evenly);
-        flex-wrap: wrap;
-    }
+    background-image: linear-gradient(
+      to top left,
+      #ff9562,
+      #ffd316
+    );
+    border-radius: 40px;
+    box-sizing: border-box;
+    padding: 3px;
     
-    li {
-        width: 45%;
-        height: 13%;
-        @include flex(row);
-
-        background-image: linear-gradient(
-            to top left,
-            #ff9562,
-            #ffd316
-        );
-        border-radius: 40px;
-        box-sizing: border-box;
-        padding: 3px;
-        
-        .indivStat {
-            @include flex(row, space-evenly);
-            background: $main;
-            border-radius: 40px;
-            width: 100%;
-            height: 100%;
-            transition: background .5s ease;
-        }
+    .indivStat {
+      @include flex(row, space-evenly);
+      background: $main;
+      border-radius: 40px;
+      width: 100%;
+      height: 100%;
+      transition: background .5s ease;
     }
+  }
 
-    button {
-        // margin: 0 30px;
-        width: 40px;
-        height: 25px;
-    }
+  button {
+    width: 40px;
+    height: 25px;
+  }
 }
 
 .graphCard {
-    @include flex(column, space-evenly);
-    // border: 1px red solid;
-    width: 100%;
-    height: 100%;
+  @include flex(column, space-evenly);
+  width: 100%;
+  height: 100%;
 }
 
 .graphButtonContainer {
-    // border: 1px red solid;
+  @include flex(row, space-between);
+  width: 90%;
+
+  button {
+    padding: 5px 0;
+  }
+
+  .numGameButton {
+    width: 140px;
+  }
+
+  .typeButtons {
     @include flex(row, flex-end);
-    width: 90%;
+
+    button {
+      width: 80px;
+    }
+
+    button:last-child {
+      margin-left: 10px;
+    }
+  }
 }
 
 .graphContainer {
-    @include flex(row, center);
-    // border: 1px red solid;
-    width: 90%;
-    height: 80%;
+  @include flex(row, center);
+  // border: 1px red solid;
+  width: 90%;
+  height: 80%;
 }
 
-footer {
-    @include flex(row, center);
-    height: 5vh;
-    // border: 1px red solid;
+.addPlayerForm{
+  @include flex(row, flex-end, flex-end);
+  width: 100%;
+  height: 8%;
+
+  .newPlayerPosDropDown,
+  input {
+    background: rgba($main,0.4);
+    width: 35%;
+  }
+
+  input {
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    text-align: left;
+    padding-left: 12px;
+    margin-right: 5px;
+  }
+  
+  button {
+    width: 30%;
+    height: 30px;
+    padding: 0 15px;
+    margin-left: 20px;
+  }
 }
