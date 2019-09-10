@@ -418,6 +418,9 @@ class App extends Component {
   // Handler - Select Graph UI
   // ============================================
   handleGraph = () => {
+    // Upload stats to Firebase before we change anything
+    this.uploadStats();
+
     this.setState({
       isGraphShowing: true
     });
