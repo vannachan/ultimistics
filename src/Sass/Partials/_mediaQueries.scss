@@ -148,6 +148,24 @@
       width: 30px;
     }
   }
+
+  // Getting rid of hover and focus states for buttons
+  button:hover,
+  button:focus {
+    background: $main;
+
+    &:not(.tab) {
+      color: $primaryText;
+    }
+  }
+
+  button:active {
+    background: $accent;
+
+    &:not(.tab) {
+      color: $main;
+    }
+  }
 } // end of 768px
 
 @media (max-width: 685px) {
