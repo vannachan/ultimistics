@@ -1,5 +1,6 @@
-// General button styling
-
+// ===============================
+// Common Button Stylings
+// ===============================
 button {
   background: $main;
   border: 1px solid $accent;
@@ -11,6 +12,7 @@ button {
 button:hover,
 button:focus {
   background: $accent radial-gradient(circle, transparent 1%, $accent 1%) center/15000%;
+  
   &:not(.tab) {
     color: $main;
   }

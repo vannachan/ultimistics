@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Chart from "chart.js";
-// import classes from "./LineGraph.module.css";
 let myGraph;
 
 class Graph extends Component {

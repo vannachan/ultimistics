@@ -4,7 +4,6 @@ body {
     rgba(255,149,98,0.7),
     rgba(255,211,22,0.7)
   );
-  // position: relative;
 }
 
 .wrapper {
@@ -15,7 +14,7 @@ body {
 }
 
 // =====================
-// LEFT SIDE
+// Left Side
 // =====================
 .leftCard,
 .rightCard {
@@ -31,6 +30,9 @@ body {
   }
 }
 
+// =====================
+// Selecter Player Info
+// =====================
 .playerInfo {
   @include flex(column, space-evenly);
   background: $main;
@@ -42,6 +44,9 @@ body {
   overflow: hidden;
 }
 
+// ===============================
+// Selected Player Game Summary
+// ===============================
 .playerSummary {
   @include flex(column, space-evenly);
   background: rgba($main, 0.3);
@@ -81,7 +86,9 @@ body {
   }
 }
 
-// ADD GAME SECTION
+// ======================
+// Add New Game Section
+// ======================
 .newGameContainer {
   background: $main;
   height: 15%;
@@ -116,13 +123,16 @@ body {
 }
 
 // =====================
-// RIGHT SIDE
+// Right Side
 // =====================
 .rightCard {
   @include flex(column, space-evenly);
   width: 60%;
 }
 
+// ===============================
+// Tabs on Top (Graph/Tracker)
+// ===============================
 .rightTabs {
   @include flex(row, flex-start, flex-start);
   width: 100%;
@@ -149,6 +159,9 @@ body {
   }
 }
 
+// ===============================
+// The Meat of the Right Side
+// ===============================
 .rightContent {
   background: $main;
   border-radius: 0 25px 25px 25px;
@@ -156,6 +169,9 @@ body {
   height: 87%;
 }
 
+// =====================
+// Stats Tracker UI
+// =====================
 .statsCounter {
   height: 100%;
 
@@ -203,6 +219,9 @@ body {
   }
 }
 
+// =====================
+// Graph Section
+// =====================
 .graphCard {
   @include flex(column, space-evenly);
   width: 100%;
@@ -240,6 +259,9 @@ body {
   height: 80%;
 }
 
+// =====================
+// Add Player Section
+// =====================
 .addPlayerForm {
   @include flex(row, flex-end, flex-end);
   width: 100%;

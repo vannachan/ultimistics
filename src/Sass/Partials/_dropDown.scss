@@ -1,5 +1,8 @@
+// ===============================
+// Common Drop Down Stylings
+// ===============================
 .dropDownContainer {
-  background: white;
+  background: $main;
   border-radius: 5px;
   display: inline-block;
   height: 30px;
@@ -8,7 +11,7 @@
 
 .dropDownContainer::after {
   content: "";
-  border: solid black;
+  border: solid $primaryText;
   border-width: 0 3px 3px 0;
   display: inline-block;
   padding: 3px;
@@ -33,5 +36,4 @@ select {
   padding-right: 15px;
   position: relative;
   z-index: 5;
-  
 }

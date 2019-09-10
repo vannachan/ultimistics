@@ -1,22 +1,18 @@
-//====================
+// ====================
 // Colours
-//====================
+// ====================
 $primaryText: black;
 $main: white;
-$background: paleturquoise;
-// $accent: rgb(43,89,195);
-
-$accent: lightgrey;
 $accent: rgb(37,60,120);
 
-//====================
+// ====================
 // Fonts
-//====================
+// ====================
 $baseFont: 'Montserrat', sans-serif;
 
-//====================
+// ====================
 // Mixins
-//====================
+// ====================
 @mixin flex($direction, $justContent: center, $alignItems: center) {
   display: flex;
   flex-direction: $direction;

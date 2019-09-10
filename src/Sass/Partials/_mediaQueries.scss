@@ -1,4 +1,7 @@
-//Large Desktops
+// =====================
+// Media Queries
+// =====================
+// Large Desktops
 @media (min-width: 1450px) {
   .headerWrapper,
   .wrapper {
@@ -6,7 +9,7 @@
   }
 } // end of 1450px
 
-//Regular Desktops
+// Regular Desktops
 @media (max-width: 1200px) {
   .rightCard {
     width: 67%;
@@ -26,7 +29,7 @@
   }
 } // end of 1075px
 
-//Portrait tablet and small desktops
+// Portrait tablet and small desktops
 @media (max-width: 950px) {
   h2 {
     @include fontStyle(2rem, 2.4rem, $primaryText, $baseFont, 500);
@@ -103,7 +106,7 @@
   }
 } // end of 890px
 
-//Landscape phone to portrait tablet
+// Landscape phone to portrait tablet
 @media (max-width: 768px) {
   .headerWrapper,
   .wrapper {
@@ -153,7 +156,7 @@
     }
   }
 
-  // Getting rid of hover and focus states for buttons
+  // Getting rid of hover and focus states for buttons on Touch Devices
   button:hover,
   button:focus {
     background: $main;
@@ -310,7 +313,7 @@
   }
 } // end of 550px
 
-//Landscape phones and down
+// Landscape phones and down
 @media (max-width: 480px) {
   .rightContent {
     height: 80%;
@@ -319,11 +322,6 @@
   .statsCounter {
     li {
       width: 45%;
-      background-image: linear-gradient(
-        to top left,
-        #ff9562,
-        #ffd316
-      );
       border-radius: 10px;
       padding: 0px;
       
@@ -357,10 +355,9 @@
       }
     }
   }
-
 } // end of 480px
 
-//Even smaller
+// Even smaller
 @media (max-width: 380px) {
   .headerWrapper,
   .wrapper {
