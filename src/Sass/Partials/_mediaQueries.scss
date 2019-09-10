@@ -1,0 +1,117 @@
+//Large Desktops
+@media (min-width: 1450px) {
+  .headerWrapper,
+  .wrapper {
+    max-width: 1450px;
+  }
+} // end of 1450px
+
+//Regular Desktops
+@media (max-width: 1200px) {
+  .rightCard {
+    width: 67%;
+  }
+} // end of 1200px
+
+@media (max-width: 1075px) {
+  .headerWrapper,
+  .wrapper {
+    width: 90%;
+  }
+
+  .statsCounter {
+    li {
+      width: 45%;
+    }
+  }
+} // end of 1075px
+
+//Portrait tablet and small desktops
+@media (max-width: 950px) {
+  h2 {
+    @include fontStyle(2rem, 2.4rem, $primaryText, $baseFont, 500);
+  }
+
+  label,
+  select,
+  option,
+  input,
+  button {
+    @include fontStyle(1.4rem, 1.4rem, $primaryText, $baseFont, 400);
+  }
+
+  p {
+    @include fontStyle(1.5rem, 1.5rem, $primaryText, $baseFont, 400);
+  }
+
+  table {
+    @include fontStyle(1.5rem, 1.5rem, $primaryText, $baseFont);
+  }
+
+  .leftCard {
+    .dropDownContainer {
+      margin-left: 5px;
+      width: 60%;
+    }
+  }
+
+  .addPlayerForm {
+    @include flex(row, space-between, flex-end);
+    .newPlayerPosDropDown,
+    input {
+      width: 35%;
+      margin: 0;
+    }
+
+    button {
+      width: 29%;
+      margin: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+} // end of 950px
+
+@media (max-width: 890px) {
+  .statsCounter {
+    li {
+      .add {
+        margin-left: 15px;
+      }
+  
+      .subtract {
+        margin-right: 15px;
+      }
+    }
+
+    button {
+      width: 33px;
+      height: 25px;
+    }
+  }
+} // end of 890px
+
+//Landscape phone to portrait tablet
+@media (max-width: 768px) {
+
+} // end of 768px
+
+//Responsive resizing and Nexus Tablet
+@media (max-width: 600px) {
+
+} // end of 600px
+
+//Landscape phones and down
+@media (max-width: 480px) {
+
+} // end of 480px
+
+//Even smaller
+@media (max-width: 380px) {
+
+} // end of 380px
+
+//teeny phones aka iphone5
+@media (max-width: 320px) {
+
+} // end of 320px

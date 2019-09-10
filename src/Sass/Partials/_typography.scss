@@ -15,14 +15,12 @@ body {
 //====================
 h1 {
   @include fontStyle(3.6rem, 4.2rem, $main, $baseFont, 500);
-  // text-transform: uppercase;
   text-align: right;
   letter-spacing: 2px;
 }
 
 h2 {
   @include fontStyle(2.5rem, 2.8rem, $primaryText, $baseFont, 500);
-  padding: 5px 0;
 }
 
 h3 {

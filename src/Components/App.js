@@ -449,7 +449,7 @@ class App extends Component {
       <div className="App">
         <header>
           <div className="headerWrapper">
-              <h1>Ultimistics</h1>
+              <h1>Ultimistics.</h1>
           </div>
         </header>
 
