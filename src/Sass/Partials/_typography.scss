@@ -37,6 +37,12 @@ input {
   letter-spacing: 1px;
 }
 
+p {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
 input::placeholder {
   letter-spacing: 0px;
 }

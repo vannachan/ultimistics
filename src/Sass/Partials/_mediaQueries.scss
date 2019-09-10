@@ -65,6 +65,7 @@
 
   .addPlayerForm {
     @include flex(row, space-between, flex-end);
+
     .newPlayerPosDropDown,
     input {
       width: 35%;
@@ -149,18 +150,209 @@
   }
 } // end of 768px
 
-//Responsive resizing and Nexus Tablet
-@media (max-width: 600px) {
+@media (max-width: 685px) {
+  .headerWrapper,
+  .wrapper {
+    width: 80%;
+  }
 
-} // end of 600px
+  header {
+    height: 0;
+    width: 100%;
+    position: sticky;
+    top: 20px;
+
+    h1 {
+      position: absolute;
+      top: 0;
+      right: 2%;
+      writing-mode: vertical-lr;
+    }
+  }
+
+  .wrapper {
+    @include flex(column, space-between, flex-start);
+    height: 100%;
+  }
+
+  .leftCard,
+  .rightCard {
+    width: 100%;
+    margin-top: 30px;
+  }
+  
+  .leftCard {
+    height: 500px;
+  }
+
+  .rightCard {
+    height: 550px;
+    padding-bottom: 30px;
+  }
+
+  .playerSummary {
+    @include flex(column, flex-start);
+    height: 65%;
+
+    .selectGame {
+      // height: 50%;
+      @include flex(row);
+    }
+
+    .dropDownContainer {
+      width: 50%;
+    }
+
+    .gameTitle {
+      height: calc(30% - 5px);
+    }
+  
+    table {
+      height: 71%;
+    }
+  } 
+
+  .newGameContainer {
+    button,
+    input {
+      width: 40%;
+    }
+  }
+
+  .statsCounter {
+    li {
+      width: 45%;
+    }
+
+    button {
+      width: 37px;
+    }
+  }
+} // end of 685px
+
+@media (max-width: 625px) {
+  .headerWrapper,
+  .wrapper {
+    width: 85%;
+    margin-left: 3%;
+  }
+
+  .statsCounter {
+    button {
+      width: 34px;
+    }
+  }
+} // end of 625px
+
+@media (max-width: 550px) {
+  h1 {
+    @include fontStyle(2.5rem, 2.5rem, $main, $baseFont, 500);
+  }
+
+  table {
+    @include fontStyle(1.3rem, 1.3rem, $primaryText, $baseFont, 400);
+  }
+
+  select,
+  option,
+  input,
+  button,
+  p {
+    @include fontStyle(1.2rem, 1.2rem, $primaryText, $baseFont, 400);
+  }
+
+  a {
+    @include fontStyle(1.2rem, 1.2rem, $main, $baseFont, 400);
+  }
+
+  .headerWrapper,
+  .wrapper {
+    width: 88%;
+    margin-left: 3%;
+  }
+
+  .addPlayerForm {
+    @include flex(row, center, flex-end);
+    height: 15%;
+    flex-wrap: wrap;
+    
+    .newPlayerPosDropDown,
+    input,
+    button {
+      width: 44%;
+    }
+
+    input {
+      margin-right: 10px;;
+    }
+    
+  }
+} // end of 550px
 
 //Landscape phones and down
 @media (max-width: 480px) {
+  .rightContent {
+    height: 80%;
+  }
+
+  .statsCounter {
+    li {
+      width: 45%;
+      background-image: linear-gradient(
+        to top left,
+        #ff9562,
+        #ffd316
+      );
+      border-radius: 10px;
+      padding: 0px;
+      
+      .indivStat {
+        background: rgba($main, 0.5);
+        border-radius: 10px;
+      }
+  
+      .add {
+        margin-left: 10px;
+      }
+  
+      .subtract {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .graphButtonContainer {
+    .numGameButton {
+      width: 100px;
+    }
+  
+    .typeButtons {
+  
+      button {
+        width: 60px;
+      }
+  
+      button:last-child {
+        margin-left: 5px;
+      }
+    }
+  }
 
 } // end of 480px
 
 //Even smaller
 @media (max-width: 380px) {
+  select,
+  option,
+  input,
+  button,
+  p {
+    @include fontStyle(1.1rem, 1.2rem, $primaryText, $baseFont, 400);
+  }
+
+  // a {
+  //   @include fontStyle(1rem, 1.2rem, $main, $baseFont, 400);
+  // }
 
 } // end of 380px
 
