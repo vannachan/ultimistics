@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class AddPlayerForm extends Component {
   render () {
     return(
-      <form action="" id="addPlayer" className="addPlayerForm">
+      <form action="" id="addPlayer" ref={this.props.addPlayerRef} className="addPlayerForm">
         <input 
           type="text" 
           onChange={this.props.nameChange}

@@ -49,6 +49,8 @@ class App extends Component {
     }
   } // end of constructor()
 
+  addPlayerRef = React.createRef();
+
   // ============================================
   // Component Did Mount
   // ============================================
@@ -298,7 +300,9 @@ class App extends Component {
         userPlayer: '',
         userPosition: ''
       });
-      document.getElementById("addPlayer").reset();
+
+      // Clear the Add Player Form
+      this.addPlayerRef.current.reset();
       
       Swal.fire(
         'Woohoo!',
@@ -317,7 +321,9 @@ class App extends Component {
         userPosition: ''
       });
 
-      document.getElementById("addPlayer").reset();
+      // Clear the Add Player Form
+      this.addPlayerRef.current.reset();
+
     } else if (this.state.userPlayer === '' && this.state.userPosition === '') {
       Swal.fire(
         'Ghost Detected! 👻',
@@ -530,6 +536,7 @@ class App extends Component {
             </div> {/* end of ./rightContent */}
 
             <AddPlayerForm 
+              addPlayerRef={this.addPlayerRef}
               nameChange={this.handlePlayerChange}
               nameVal={this.state.userPlayer}
               posChange={this.handleSelectPosition}
