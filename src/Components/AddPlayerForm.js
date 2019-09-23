@@ -4,17 +4,21 @@ class AddPlayerForm extends Component {
   render () {
     return(
       <form action="" id="addPlayer" ref={this.props.addPlayerRef} className="addPlayerForm">
+        <label htmlFor="newPlayerName" className="visuallyHidden">Enter new player's name</label>
         <input 
-          type="text" 
+          type="text"
+          name="newPlayerName" 
+          id="newPlayerName"  
           onChange={this.props.nameChange}
           value={this.props.nameVal}
           placeholder="New Player Name" 
         />
         <span className="newPlayerPosDropDown dropDownContainer">
+          <label htmlFor="newPlayerPosition" className="visuallyHidden">Dropdown menu for player's position</label>
           <select 
             onChange={this.props.posChange}   
-            name="position" 
-            id="position" 
+            name="newPlayerPosition" 
+            id="newPlayerPosition" 
             defaultValue={'DEFAULT'}
           >
             <option value="DEFAULT" disabled>Choose a position</option>
