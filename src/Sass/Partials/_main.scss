@@ -9,6 +9,7 @@ body {
 .wrapper {
   @include flex(row, space-between, flex-start);
   width: 85%;
+  max-width: 1400px;
   height: 83vh;
   margin: 0 auto;
 }

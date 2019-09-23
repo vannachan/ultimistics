@@ -57,11 +57,11 @@ button {
   @include fontStyle(1.6rem, 1.6rem, $primaryText, $baseFont, 400);
 }
 
-input::-moz-placeholder,{
+input::-moz-placeholder {
   opacity: 1;
 }
 
-input::-webkit-input-placeholder,{
+input::-webkit-input-placeholder {
   color: $primaryText;
   opacity: 1;
 }
