@@ -4,11 +4,14 @@ class AddGameForm extends Component {
   render () {
     return(
       <form action="" id="addGame">
+        <label htmlFor="newGameTitle" className="visuallyHidden">Enter game name</label>
         <input 
           type="text" 
           onChange={this.props.gameChange}
           value={this.props.gameVal}
           placeholder="Game Title" 
+          id="newGameTitle"
+          name="newGameTitle"
         />
 
         <button onClick={this.props.submit}>Add new game!</button>
