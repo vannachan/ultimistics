@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class DisplayTracker extends Component {
-  render () {
-    return(
-      <li>
-        <div className="indivStat">
-          <button onClick={this.props.addStat} className="add"> + </button>
-          <p>{`${this.props.name}`}</p>
-          <button onClick={this.props.subStat} className="subtract"> - </button>
-        </div>
-      </li>
-      
-    );
-  }
+const DisplayTracker = (props) => {
+  return (
+    <li>
+      <div className="indivStat">
+        <button onClick={props.addStat} className="add"> + </button>
+        <p>{`${props.name}`}</p>
+        <button onClick={props.subStat} className="subtract"> - </button>
+      </div>
+    </li>
+  );
 }
 
 export default DisplayTracker;
