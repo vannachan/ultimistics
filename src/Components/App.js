@@ -4,12 +4,8 @@ import firebase from '../firebase';
 import Swal from 'sweetalert2';
 import PlayerSummary from './PlayerSummary';
 import TrackerGraph from './TrackerGraph';
-// import DisplayTracker from './DisplayTracker';
-// import AddPlayerForm from './AddPlayerForm';
-// import Graph from './Graph';
 
 class App extends Component {
-
   // ============================================
   // Constructor
   // ============================================
@@ -42,7 +38,7 @@ class App extends Component {
 
       // graph states
       isGraphShowing: false,
-      isSingleGraph: true
+      // isSingleGraph: true
     }
   } // end of constructor()
 

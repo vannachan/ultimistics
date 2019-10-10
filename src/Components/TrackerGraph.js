@@ -4,31 +4,6 @@ import AddPlayerForm from './AddPlayerForm';
 import Graph from './Graph';
 
 class TrackerGraph extends Component {
-  constructor() {
-    super();
-    this.state = {
-      graphType: "bar"
-    }
-  }
-
-  // ============================================
-  // Handler - Select Bar Graph
-  // ============================================
-  handleBar = () => {
-    this.setState({
-      graphType: "bar"
-    });
-  }
-
-  // ============================================
-  // Handler - Select Radar Graph
-  // ============================================
-  handleRadar = () => {
-    this.setState({
-      graphType: "radar"
-    });
-  }
-
   // ============================================
   // Render
   // ============================================
@@ -63,11 +38,8 @@ class TrackerGraph extends Component {
             allGames={this.props.appState.allGames}
             statsObject={this.props.appState.currStats}
             label={this.props.appState.currGame}
-            type={this.state.graphType}
             gamesClick={this.props.numGamesHandler}
             isSingleGraph={this.props.appState.isSingleGraph}
-            barClick={this.handleBar}
-            radarClick={this.handleRadar}
           />}
         </div> {/* end of ./rightContent */}
 
