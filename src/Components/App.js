@@ -3,9 +3,10 @@ import '../Sass/App.scss';
 import firebase from '../firebase';
 import Swal from 'sweetalert2';
 import PlayerSummary from './PlayerSummary';
-import DisplayTracker from './DisplayTracker';
-import AddPlayerForm from './AddPlayerForm';
-import Graph from './Graph';
+import TrackerGraph from './TrackerGraph';
+// import DisplayTracker from './DisplayTracker';
+// import AddPlayerForm from './AddPlayerForm';
+// import Graph from './Graph';
 
 class App extends Component {
 
@@ -41,7 +42,6 @@ class App extends Component {
 
       // graph states
       isGraphShowing: false,
-      graphType: "bar",
       isSingleGraph: true
     }
   } // end of constructor()
@@ -391,24 +391,6 @@ class App extends Component {
   }
 
   // ============================================
-  // Handler - Select Bar Graph
-  // ============================================
-  handleBar = () => {
-    this.setState({
-      graphType: "bar"
-    });
-  }
-
-  // ============================================
-  // Handler - Select Radar Graph
-  // ============================================
-  handleRadar = () => {
-    this.setState({
-      graphType: "radar"
-    });
-  }
-
-  // ============================================
   // Handler - Select Tracker UI
   // ============================================
   handleTracker = () => {
@@ -458,7 +440,7 @@ class App extends Component {
           </div>
         </header>
 
-        <div className="wrapper">
+        <main className="wrapper">
           <PlayerSummary 
             appState={this.state}
             playerChangeHandler={this.handleSelectPlayer}
@@ -466,53 +448,20 @@ class App extends Component {
             gameChangeHandler={this.handleGameChange}
             gameSubmitHandler={this.handleAddGame}
           />
-  
-          <section className="rightCard">
-            <div className="rightTabs">
-              <button onClick={this.handleTracker} className={`${this.state.isGraphShowing ? "notSelected tab" : "tab"}`}>Tracker</button>
-              <button onClick={this.handleGraph} className={`${this.state.isGraphShowing ? "tab" : "notSelected tab"}`}>Graph</button>
-            </div>
 
-            <div className="rightContent">
-              {!this.state.isGraphShowing && <section className="statsCounter">
-                <ul>
-                  {
-                    Object.keys(this.state.currStats).map( (statName) => {
-                      return (
-                        <DisplayTracker 
-                          name={statName}
-                          addStat={() => this.handleAdd(statName)}
-                          subStat={() => this.handleSubtract(statName)}
-                          key={statName}
-                        />
-                      );
-                    })
-                  }
-                </ul>
-              </section>}
-  
-              {this.state.isGraphShowing && <Graph 
-                allGames={this.state.allGames}
-                statsObject={this.state.currStats}
-                label={this.state.currGame}
-                type={this.state.graphType}
-                gamesClick={this.handleNumGames}
-                isSingleGraph={this.state.isSingleGraph}
-                barClick={this.handleBar}
-                radarClick={this.handleRadar}
-              />}
-            </div> {/* end of ./rightContent */}
-
-            <AddPlayerForm 
-              addPlayerRef={this.addPlayerRef}
-              nameChange={this.handlePlayerChange}
-              nameVal={this.state.userPlayer}
-              posChange={this.handleSelectPosition}
-              submit={this.handlerAddPlayer}
-            />
-            
-          </section> {/* end of ./rightCard */}
-        </div> {/* end of ./wrapper */}
+          <TrackerGraph
+            appState={this.state}
+            trackerHandler={this.handleTracker}
+            graphHandler={this.handleGraph}
+            addHandler={this.handleAdd}
+            subHandler={this.handleSubtract}
+            numGamesHandler={this.handleNumGames}
+            addPlayerRef={this.addPlayerRef}
+            nameChangeHandler={this.handlePlayerChange}
+            posChangeHandler={this.handleSelectPosition}
+            playerSubmitHandler={this.handlerAddPlayer}
+          />
+        </main> {/* end of ./wrapper */}
 
         <footer>
           <p>Coded and designed by <a href="https://twitter.com/_vannachan" target="_blank">Vanna Chan</a> © 2019</p>
