@@ -460,16 +460,10 @@ class App extends Component {
 
         <div className="wrapper">
           <PlayerSummary 
+            appState={this.state}
             playerChangeHandler={this.handleSelectPlayer}
-            allPlayers={this.state.allPlayers}
-            playerName={this.state.playerName}
-            playerPosition={this.state.position}
             gameSelectHandler={this.handleSelectGame}
-            allGames={this.state.allGames}
-            gameName={this.state.currGame}
-            currStats={this.state.currStats}
             gameChangeHandler={this.handleGameChange}
-            gameVal={this.state.userGame}
             gameSubmitHandler={this.handleAddGame}
           />
   

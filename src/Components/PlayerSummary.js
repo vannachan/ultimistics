@@ -12,11 +12,11 @@ class PlayerSummary extends Component {
 
           <PlayerDropDown 
             menuChange={this.props.playerChangeHandler}
-            allPlayers={this.props.allPlayers}
+            allPlayers={this.props.appState.allPlayers}
           />
 
-          <h2>{this.props.playerName}</h2>
-          <h3>Position: {this.props.playerPosition}</h3>
+          <h2>{this.props.appState.playerName}</h2>
+          <h3>Position: {this.props.appState.playerPosition}</h3>
         </div>
 
         <div className="playerSummary">
@@ -24,20 +24,20 @@ class PlayerSummary extends Component {
             <h4>Game Summary</h4>
             <GameDropDown 
               menuChange={this.props.gameSelectHandler}
-              allGames={this.props.allGames}
-              gameName={this.props.gameName}
+              allGames={this.props.appState.allGames}
+              gameName={this.props.appState.gameName}
             />
           </div>
 
           <SummaryTable 
-            summaryObject={this.props.currStats}
+            summaryObject={this.props.appState.currStats}
           />
         </div>
 
         <div className="newGameContainer">
           <AddGameForm 
             gameChange={this.props.gameChangeHandler}
-            gameVal={this.props.gameVal}
+            gameVal={this.props.appState.gameVal}
             submit={this.props.gameSubmitHandler}
           />
         </div>
