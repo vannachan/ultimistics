@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 class GameDropDown extends Component {
-  render () {
+  render() {
     return(
       <div className="selectGame">
         <label htmlFor="game">Game:</label>

@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 import '../Sass/App.scss';
 import firebase from '../firebase';
 import Swal from 'sweetalert2';
-import SummaryTable from './SummaryTable';
+import PlayerSummary from './PlayerSummary';
 import DisplayTracker from './DisplayTracker';
 import AddPlayerForm from './AddPlayerForm';
-import AddGameForm from './AddGameForm';
-import PlayerDropDown from './PlayerDropDown';
-import GameDropDown from './GameDropDown';
 import Graph from './Graph';
 
 class App extends Component {
@@ -453,7 +450,6 @@ class App extends Component {
   // Render
   // ============================================
   render () {
-    console.log("we are in render!");
     return (
       <div className="App">
         <header>
@@ -463,41 +459,19 @@ class App extends Component {
         </header>
 
         <div className="wrapper">
-          <section className="info leftCard">
-            <div className="playerInfo">
-
-              <PlayerDropDown 
-                menuChange={this.handleSelectPlayer}
-                allPlayers={this.state.allPlayers}
-              />
-
-              <h2>{this.state.playerName}</h2>
-              <h3>Position: {this.state.position}</h3>
-            </div>
-    
-            <div className="playerSummary">
-              <div className="gameTitle">
-                <h4>Game Summary</h4>
-                <GameDropDown 
-                  menuChange={this.handleSelectGame}
-                  allGames={this.state.allGames}
-                  gameName={this.state.currGame}
-                />
-              </div>
-
-              <SummaryTable 
-                summaryObject={this.state.currStats}
-              />
-            </div>
-
-            <div className="newGameContainer">
-              <AddGameForm 
-                gameChange={this.handleGameChange}
-                gameVal={this.state.userGame}
-                submit={this.handleAddGame}
-              />
-            </div>
-          </section> {/* end of ./info ./leftCard*/}
+          <PlayerSummary 
+            playerChangeHandler={this.handleSelectPlayer}
+            allPlayers={this.state.allPlayers}
+            playerName={this.state.playerName}
+            playerPosition={this.state.position}
+            gameSelectHandler={this.handleSelectGame}
+            allGames={this.state.allGames}
+            gameName={this.state.currGame}
+            currStats={this.state.currStats}
+            gameChangeHandler={this.handleGameChange}
+            gameVal={this.state.userGame}
+            gameSubmitHandler={this.handleAddGame}
+          />
   
           <section className="rightCard">
             <div className="rightTabs">
@@ -545,8 +519,6 @@ class App extends Component {
             
           </section> {/* end of ./rightCard */}
         </div> {/* end of ./wrapper */}
-
-        
 
         <footer>
           <p>Coded and designed by <a href="https://twitter.com/_vannachan" target="_blank">Vanna Chan</a> © 2019</p>
