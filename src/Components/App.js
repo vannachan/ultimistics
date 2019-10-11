@@ -339,7 +339,7 @@ class App extends Component {
   } // end of handlerAddPlayer()
 
   // ============================================
-  // Handler - Select Game
+  // Handler - Select Game from Drop Down
   // ============================================
   handleSelectGame = (event) => {
     // Upload stats to Firebase before we change anything
@@ -457,7 +457,7 @@ class App extends Component {
             posChangeHandler={this.handleSelectPosition}
             playerSubmitHandler={this.handlerAddPlayer}
           />
-        </main> {/* end of ./wrapper */}
+        </main>
 
         <footer>
           <p>Coded and designed by <a href="https://twitter.com/_vannachan" target="_blank">Vanna Chan</a> © 2019</p>
