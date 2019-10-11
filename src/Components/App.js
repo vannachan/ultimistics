@@ -427,7 +427,7 @@ class App extends Component {
   // ============================================
   // Render
   // ============================================
-  render () {
+  render() {
     return (
       <div className="App">
         <header>

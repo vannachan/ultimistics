@@ -1,7 +1,7 @@
 import React from 'react';
 
 const AddGameForm = (props) => {
-  return(
+  return (
     <form action="" id="addGame">
       <label htmlFor="newGameTitle" className="visuallyHidden">Enter game name</label>
       <input 
