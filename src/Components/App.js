@@ -38,7 +38,6 @@ class App extends Component {
 
       // graph states
       isGraphShowing: false,
-      // isSingleGraph: true
     }
   } // end of constructor()
 
@@ -53,7 +52,6 @@ class App extends Component {
     // Load up the entire database and reload when there are ANY updates
     dbRef.on('value', (data) => {
       const response = data.val();
-      console.log("This is the resp",response);
 
       let players=[];
       let newName = "";
@@ -352,7 +350,8 @@ class App extends Component {
         newGameId = i;
         newStats = this.state.allGames[i].stats;
       }
-    } 
+    }
+
     this.setState({
       currGame: event.target.value,
       currGameId: newGameId,

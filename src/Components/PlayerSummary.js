@@ -24,7 +24,7 @@ const PlayerSummary = (props) => {
           <GameDropDown 
             menuChange={props.gameSelectHandler}
             allGames={props.appState.allGames}
-            gameName={props.appState.gameName}
+            gameName={props.appState.currGame}
           />
         </div>
 
