@@ -15,7 +15,7 @@ const PlayerSummary = (props) => {
         />
 
         <h2>{props.appState.playerName}</h2>
-        <h3>Position: {props.appState.playerPosition}</h3>
+        <h3>Position: {props.appState.position}</h3>
       </div>
 
       <div className="playerSummary">
