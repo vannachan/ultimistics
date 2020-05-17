@@ -313,6 +313,7 @@ input:focus {
     @include flex(column);
     width: 20px;
     height: 20px;
+    padding: 0; // ios circle fix
     background: none;
     border: 1px solid $primaryText;
     border-radius: 50%;
