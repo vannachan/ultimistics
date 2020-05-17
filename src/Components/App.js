@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../Sass/App.scss';
 import firebase from '../firebase';
 import Swal from 'sweetalert2';
+import Faq from './Faq';
 import PlayerSummary from './PlayerSummary';
 import TrackerGraph from './TrackerGraph';
 
@@ -431,7 +432,7 @@ class App extends Component {
       <div className="App">
         <header>
           <div className="headerWrapper">
-              <h1>Ultimistics.</h1>
+            <h1>Ultimistics.</h1>
           </div>
         </header>
 
@@ -461,6 +462,11 @@ class App extends Component {
         <footer>
           <p>Coded and designed by <a href="https://twitter.com/_vannachan" target="_blank">Vanna Chan</a> © 2019</p>
         </footer>
+
+        <div className="faqContainer">
+          <button className="faqButton">?</button>
+          <Faq/>
+        </div>
       </div>
     );
   }

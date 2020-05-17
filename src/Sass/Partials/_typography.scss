@@ -76,3 +76,28 @@ a {
   }
 }
 
+// ====================
+// Misc.
+// ====================
+.faqContainer .faqButton {
+  @include fontStyle(1.4rem, 1.4rem, $primaryText, $baseFont, 500);
+  transition: all 0.5s;
+}
+
+.faqModal h2 {
+  @include fontStyle(2.5rem, 2.8rem, $primaryText, $baseFont, 500);
+  text-align: center;
+}
+
+.faqModal h3 {
+  @include fontStyle(1.8rem, 2.8rem, $primaryText, $baseFont, 500);
+  text-align: left;
+}
+
+.faqModal {
+  p,
+  ol {
+    @include fontStyle(1.6rem, 2.2rem, $primaryText, $baseFont, 400);
+    text-align: left;
+  }
+}

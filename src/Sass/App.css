@@ -363,6 +363,44 @@ a:hover, a:focus {
   text-shadow: 1px 1px 0 black;
 }
 
+.faqContainer .faqButton {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 1.4rem;
+  line-height: 1.4rem;
+  color: black;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.faqModal h2 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 2.5rem;
+  line-height: 2.8rem;
+  color: black;
+  text-align: center;
+}
+
+.faqModal h3 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 1.8rem;
+  line-height: 2.8rem;
+  color: black;
+  text-align: left;
+}
+
+.faqModal p,
+.faqModal ol {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+  color: black;
+  text-align: left;
+}
+
 .dropDownContainer {
   background: white;
   border-radius: 5px;
@@ -395,8 +433,6 @@ select {
   height: 100%;
   padding-left: 5px;
   padding-right: 15px;
-  position: relative;
-  z-index: 5;
 }
 
 select:focus {
@@ -453,6 +489,7 @@ header {
 body {
   background: -webkit-gradient(linear, right top, left bottom, from(rgba(255, 149, 98, 0.7)), to(rgba(255, 211, 22, 0.7)));
   background: linear-gradient(to bottom left, rgba(255, 149, 98, 0.7), rgba(255, 211, 22, 0.7));
+  position: relative;
 }
 
 .wrapper {
@@ -898,6 +935,72 @@ input:focus {
   margin-left: 20px;
 }
 
+.faqContainer {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.faqContainer .faqButton {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 20px;
+  height: 20px;
+  background: none;
+  border: 1px solid black;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.faqContainer .faqButton:hover, .faqContainer .faqButton:focus, .faqContainer .faqButton:active {
+  background: #253c78;
+  border: #253c78;
+  color: white;
+}
+
+.faqContainer .faqButton:hover + .faqModal, .faqContainer .faqButton:focus + .faqModal, .faqContainer .faqButton:active + .faqModal {
+  display: block;
+}
+
+.faqModal {
+  display: none;
+  position: absolute;
+  top: 35px;
+  left: 35px;
+  z-index: 10;
+  width: 600px;
+  padding: 5px;
+  background-image: -webkit-gradient(linear, right bottom, left top, from(#ff9562), to(#ffd316));
+  background-image: linear-gradient(to top left, #ff9562, #ffd316);
+  border-radius: 25px;
+}
+
+.faqContent {
+  width: 100%;
+  padding: 25px;
+  background: white;
+  border-radius: 21px;
+}
+
+.faqContent h2 {
+  margin-bottom: 3rem;
+}
+
+.faqContent h3 {
+  margin: 1.7rem 0 0;
+}
+
 footer {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1196,6 +1299,21 @@ a {
   .statsCounter button {
     width: 37px;
   }
+  .faqContainer {
+    position: fixed;
+    top: auto;
+    left: auto;
+    bottom: 10px;
+    right: 25px;
+  }
+  .faqModal {
+    position: fixed;
+    width: 85%;
+    top: auto;
+    left: auto;
+    bottom: 25px;
+    right: 40px;
+  }
 }
 
 @media (max-width: 625px) {
@@ -1272,6 +1390,19 @@ a {
   }
   .addPlayerForm input {
     margin-right: 10px;
+  }
+  .faqContainer {
+    right: 3%;
+  }
+  .faqModal {
+    height: 90vh;
+    width: 95%;
+    right: 2.5%;
+    bottom: 35px;
+  }
+  .faqContent {
+    height: 100%;
+    overflow-y: scroll;
   }
 }
 
@@ -1373,6 +1504,31 @@ a {
   .addPlayerForm input {
     margin-right: 4%;
   }
+  .faqModal h2 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 2.1rem;
+    line-height: 2.8rem;
+    color: black;
+    text-align: center;
+  }
+  .faqModal h3 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 1.6rem;
+    line-height: 2.8rem;
+    color: black;
+    text-align: left;
+  }
+  .faqModal p,
+  .faqModal ol {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 1.3rem;
+    line-height: 1.9rem;
+    color: black;
+    text-align: left;
+  }
 }
 
 @media (max-width: 320px) {
@@ -1393,6 +1549,22 @@ a {
   }
   .leftCard {
     margin-top: 0;
+  }
+  .faqContainer {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    bottom: auto;
+    right: auto;
+  }
+  .faqModal {
+    position: absolute;
+    width: 95vw;
+    height: calc(100vh - 35px);
+    top: 20px;
+    left: 2%;
+    bottom: auto;
+    right: auto;
   }
 }
 

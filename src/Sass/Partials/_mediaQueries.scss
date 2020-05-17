@@ -253,6 +253,24 @@
       width: 37px;
     }
   }
+
+  .faqContainer {
+    position: fixed;
+    top: auto;
+    left: auto;
+    bottom: 10px;
+    right: 25px;
+  }
+
+  .faqModal {
+    position: fixed;
+    width: 85%;
+    top: auto;
+    left: auto;
+    bottom: 25px;
+    right: 40px;
+  }
+
 } // end of 685px
 
 @media (max-width: 625px) {
@@ -310,6 +328,22 @@
     input {
       margin-right: 10px;;
     }
+  }
+
+  .faqContainer {
+    right: 3%;
+  }
+
+  .faqModal {
+    height: 90vh;
+    width: 95%;
+    right: 2.5%;
+    bottom: 35px;
+  }
+  
+  .faqContent {
+    height: 100%;
+    overflow-y: scroll;
   }
 } // end of 550px
 
@@ -415,6 +449,24 @@
       margin-right: 4%;
     }
   }
+
+  .faqModal h2 {
+    @include fontStyle(2.1rem, 2.8rem, $primaryText, $baseFont, 500);
+    text-align: center;
+  }
+
+  .faqModal h3 {
+    @include fontStyle(1.6rem, 2.8rem, $primaryText, $baseFont, 500);
+    text-align: left;
+  }
+
+  .faqModal {
+    p,
+    ol {
+      @include fontStyle(1.3rem, 1.9rem, $primaryText, $baseFont, 400);
+      text-align: left;
+    }
+  }
 } // end of 380px
 
 //teeny phones aka iphone5
@@ -437,5 +489,23 @@
 
   .leftCard {
     margin-top: 0;
+  }
+
+  .faqContainer {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    bottom: auto;
+    right: auto;
+  }
+
+  .faqModal {
+    position: absolute;
+    width: 95vw;
+    height: calc(100vh - 35px);
+    top: 20px;
+    left: 2%;
+    bottom: auto;
+    right: auto;
   }
 } // end of 320px
