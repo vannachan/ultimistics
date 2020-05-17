@@ -26,7 +26,7 @@ select {
   // Get rid of default arrow
   text-indent: 0.01px;
   text-overflow: '';
-  -webkit-appearance: button;
+  -webkit-appearance: none;
 
   background: rgba($main, 0);
   border: 2px transparent;
