@@ -463,10 +463,7 @@ class App extends Component {
           <p>Coded and designed by <a href="https://twitter.com/_vannachan" target="_blank">Vanna Chan</a> © 2019</p>
         </footer>
 
-        <div className="faqContainer">
-          <button className="faqButton">?</button>
-          <Faq/>
-        </div>
+        <Faq/>
       </div>
     );
   }
