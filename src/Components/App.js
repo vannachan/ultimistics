@@ -460,7 +460,7 @@ class App extends Component {
         </main>
 
         <footer>
-          <p>Coded and designed by <a href="https://twitter.com/_vannachan" target="_blank">Vanna Chan</a> © 2019</p>
+          <p>Coded and designed by <a href="https://twitter.com/_vannachan" target="_blank">Vanna Chan</a> © {new Date().getFullYear()}</p>
         </footer>
 
         <Faq/>
